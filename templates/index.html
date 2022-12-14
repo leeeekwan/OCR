@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/flower/static/style.css">
+    <title>HAP(인사등록프로그램)</title>
+</head>
+<body>
+    <div id="header">   <!-- 상단 -->
+
+    </div>
+    <div id="contents">   <!-- 내용 -->
+        {% if employees != None %}   <!--DB에서 가져온 직원 정보-->
+            <table id="employees">
+                <thead>
+                    <tr>
+                        <th>NO</th>
+                        <th>Image</th>
+                        <th>성명</th>
+                        <th>부서</th>
+                        <th>직위(직책)</th>
+                        <th>휴대폰</th>
+                        <th>입사일</th>
+                        <th>메일주소</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in employees %}
+                        <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.image }}</td>
+                            <td>{{ i.name }}</td>
+                            <td>{{ i.depart }}</td>
+                            <td>{{ i.class }}</td>
+                            <td>{{ i.phone }}</td>
+                            <td>{{ i.hire_date }}</td>
+                            <td>{{ i.email }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h2> 정보가 없습니다 </h2>
+        {% endif %}
+    </div>
+</body>
+</html>
