@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="/flower/static/style.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <title>HAP(인사등록프로그램)</title>
 </head>
 <body>
@@ -33,7 +34,7 @@
                             <td>{{ i.image }}</td>
                             <td>{{ i.name }}</td>
                             <td>{{ i.depart }}</td>
-                            <td>{{ i.class }}</td>
+                            <td>{{ i.class_field }}</td>
                             <td>{{ i.phone }}</td>
                             <td>{{ i.hire_date }}</td>
                             <td>{{ i.email }}</td>

@@ -13,7 +13,7 @@ def home(request):
         'employees' : employees,
     }
 
-    return render(request, 'index.html', employees)
+    return render(request, 'index.html', context)
 def upload(request):
     context={}
 
