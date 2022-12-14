@@ -14,4 +14,6 @@
 
 #employees th, td {
     border-bottom: 3px solid gainsboro;
+    text-align: center;
+    padding: 8px 5px 0 5px;
 }
