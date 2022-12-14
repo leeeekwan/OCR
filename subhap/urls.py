@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-
+from . import views
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('info/',include('subhap.urls'))
+   
+    path('',views.upload),
+    path('coocr_upload',views.ocr)
+
 ]
