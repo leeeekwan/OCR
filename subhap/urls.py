@@ -1,3 +1,4 @@
+
 """hap URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -18,7 +19,8 @@ from django.urls import path,include
 from . import views
 urlpatterns = [
    
-    path('',views.upload),
+    path('', views.home, name='home'),
     path('coocr_upload',views.ocr)
 
 ]
+

@@ -1,9 +1,19 @@
 from django.shortcuts import render
+from .models import Employees
 from PIL import Image
 from django.core.files.storage import FileSystemStorage
 import pytesseract
 # Create your views here.
 
+def home(request):
+
+    employees = Employees.objects.all()
+
+    context = {
+        'employees' : employees,
+    }
+
+    return render(request, 'index.html', employees)
 def upload(request):
     context={}
 
@@ -37,3 +47,4 @@ def ocr(request):
         print(resulttext)
 
     return render(request,'ocr.html',context)
+

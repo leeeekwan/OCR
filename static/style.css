@@ -1,0 +1,17 @@
+@charset 'UTF-8';
+
+#contents {
+    margin-top: 25px;
+}
+
+#employees {
+    width: 80%;
+    height: auto;
+    margin-left:auto; 
+    margin-right:auto;
+    border: 3px solid gray;
+}
+
+#employees th, td {
+    border-bottom: 3px solid gainsboro;
+}
