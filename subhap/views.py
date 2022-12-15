@@ -99,6 +99,7 @@ def ocrarmy(request):
 
             # 이미지를 불러오는 경로도 좀 손을 봐야 한다
             
+
             fs = FileSystemStorage(location = 'static\source\document_army')    # 이미지들이 저장되는 곳
             imgname= fs.save(f'src-{name_old}', uploadfile)       # 이미지를 저정하는 동작 (이미지명, 이미지파일)
             # print(imgname)                                        # 이미지명 확인
@@ -118,9 +119,31 @@ def ocrarmy(request):
             # ---------------------------------------------------
 
 
+
+
+
+
+def ocrbody(request):
+    context = {}
+    if 'uploadfile' in request.FILES:
+        
+        uploadfile = request.FILES.get('uploadfile', '')
+            
+        if uploadfile != '':
+            name_old = uploadfile.name
+            
+            fs = FileSystemStorage(location = 'static/source')
+            imgname= fs.save(f'src-{name_old}', uploadfile)
+            print(imgname)
+            imgfile = Image.open(f'./static/source/{imgname}')
+            path=f'./static/source/{imgname}'
+            #resulttext = pytesseract.image_to_string(imgfile, lang='kor')
+            #지금은 파이테서렉트 쓴것이 리절트 텍스트 
+            #은수님의 모듈 결과를 resulttext에 대입해주세요
+        resulttext='' 
         context['imgname'] = imgname
         context['resulttext'] = resulttext
 
 
-    return render(request,'ocrarmy.html',context)
-# ------------------------------------------------------------------------------------------
+    return render(request,'ocrbody.html',context)
+
