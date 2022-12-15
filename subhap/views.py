@@ -87,26 +87,32 @@ def ocr(request):
 
 def ocrarmy(request):
     context = {}
+    print('ocrarmy')
     if 'uploadfile' in request.FILES:
         
         
         # uploadfile은 html에서 불러오는 것
         uploadfile = request.FILES.get('uploadfile', '')
+        print(uploadfile)
+        print('asdfljasdflkj')
             
         if uploadfile != '':
             name_old = uploadfile.name
+            print('제발')
 
 
             # 이미지를 불러오는 경로도 좀 손을 봐야 한다
             
 
-            fs = FileSystemStorage(location = 'static\source\document_army')    # 이미지들이 저장되는 곳
+            #fs = FileSystemStorage(location = 'static\source\document_army')    # 이미지들이 저장되는 곳
+            fs = FileSystemStorage(location = 'static/source/document_army')    # 이미지들이 저장되는 곳
             imgname= fs.save(f'src-{name_old}', uploadfile)       # 이미지를 저정하는 동작 (이미지명, 이미지파일)
             # print(imgname)                                        # 이미지명 확인
 
 
-            path=f'static\source\document_army'                   # 이미지를 불러올 경로
-
+            #path=f'static\source\document_army'                   # 이미지를 불러올 경로
+            path=f'static/source/document_army'                   # 이미지를 불러올 경로
+            print(path)
 
 
             # ------------------------------------------------- 
@@ -114,14 +120,16 @@ def ocrarmy(request):
             # subhap\ocrtools\armyOCR\easy 경로에서 army.py 에서 call_army를 호출 경로를 보내줌
 
             resulttext = call_army(path)    
-            # resulttext = call_army(path, imgname)   
-            context['resulttext']=resulttext 
-            context['imgname']=imgname
+            # resulttext = call_army(path, imgname)    
 
             # ---------------------------------------------------
 
-    return render(request,'ocrarmy.html',context)
 
+        context['imgname'] = imgname
+        context['resulttext'] = resulttext
+
+
+    return render(request,'ocrarmy.html',context)
 
 
 

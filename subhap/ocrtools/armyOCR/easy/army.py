@@ -1,9 +1,6 @@
 from easyocr.easyocr import *
 
 # -------------------
-from imutils.perspective import four_point_transform
-from imutils.contours import sort_contours
-import imutils
 import cv2
 import requests
 import numpy as np
@@ -38,6 +35,7 @@ def get_files(path):
 
 
 def call_army(path):
+    print('잘들어감')
 # def call_army(path, imgname):
 
 
@@ -47,9 +45,11 @@ def call_army(path):
     # 실질적인 OCR 작동을 불러오는 부분, 커스텀 모델의 적용등이 여기서 이루어짐
     reader = Reader(['ko'], gpu=False,
                     # model_storage_directory='./workspace/user_network_dir',
-                    model_storage_directory=r'subhap\ocrtools\armyOCR\easy\workspace\user_network_dir',
+                    #model_storage_directory=r'subhap\ocrtools\armyOCR\easy\workspace\user_network_dir',
+                    model_storage_directory=r'subhap/ocrtools/armyOCR/easy/workspace/user_network_dir',
                     # user_network_directory='./workspace/user_network_dir',
-                    user_network_directory=r'subhap\ocrtools\armyOCR\easy\workspace\user_network_dir',
+                    #user_network_directory=r'subhap\ocrtools\armyOCR\easy\workspace\user_network_dir',
+                    user_network_directory=r'subhap/ocrtools/armyOCR/easy/workspace/user_network_dir',
                     recog_network='custom')
 
     # 폴더 안의 이미지를 상단부터 하단 순으로 순차적으로 불러옴
