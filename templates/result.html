@@ -12,7 +12,16 @@
 </h1>
 
 
+<div id="army">
+    병역 정보
 
+
+</div>
+<div id="body">
+    신체 정보
+
+
+</div>
 
 
 
@@ -20,4 +29,22 @@
 
 
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#army').click(function(){
+        
+        location.href='/coocr_upload/army'
+
+    })
+    $('#body').click(function(){
+        
+        location.href='/coocr_upload/body'
+
+    })
+
+});
+   
+
+</script>
 </html>
