@@ -22,8 +22,9 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('coocr_upload/',views.ocr),
     path('info/<int:i>',views.result),
-    path('coocr_upload/army',views.ocrarmy),
-    path('coocr_upload/body',views.ocrbody),
+    path('coocr_upload/army/<int:i>',views.ocrarmy),
+    path('coocr_upload/body/<int:i>',views.ocrbody),
+    path('coocr_upload/resident/<int:i>',views.ocrresident),
 
 ]
 

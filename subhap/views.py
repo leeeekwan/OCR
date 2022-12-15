@@ -41,6 +41,7 @@ def result(request,i):
     emp= Employees.objects.get(id=i)
     context={
         'name':emp.name,
+        'idx':i
         
 
     }
@@ -85,7 +86,7 @@ def ocr(request):
 
 # 병역문서 불러오는 부분
 
-def ocrarmy(request):
+def ocrarmy(request,i):
     context = {}
     print('ocrarmy')
     if 'uploadfile' in request.FILES:
@@ -133,7 +134,7 @@ def ocrarmy(request):
 
 
 
-def ocrbody(request):
+def ocrbody(request,i):
     context = {}
     if 'uploadfile' in request.FILES:
         
@@ -150,6 +151,29 @@ def ocrbody(request):
             #resulttext = pytesseract.image_to_string(imgfile, lang='kor')
             #지금은 파이테서렉트 쓴것이 리절트 텍스트 
             #은수님의 모듈 결과를 resulttext에 대입해주세요
+        resulttext='' 
+        context['imgname'] = imgname
+        context['resulttext'] = resulttext
+
+
+    return render(request,'ocrbody.html',context)
+def ocrresident(request,i):
+    context = {}
+    if 'uploadfile' in request.FILES:
+        
+        uploadfile = request.FILES.get('uploadfile', '')
+            
+        if uploadfile != '':
+            name_old = uploadfile.name
+            
+            fs = FileSystemStorage(location = 'static/source')
+            imgname= fs.save(f'src-{name_old}', uploadfile)
+            print(imgname)
+            imgfile = Image.open(f'./static/source/{imgname}')
+            path=f'./static/source/{imgname}'
+            #resulttext = pytesseract.image_to_string(imgfile, lang='kor')
+            #지금은 파이테서렉트 쓴것이 리절트 텍스트 
+            #혜지님의 모듈 결과를 resulttext에 대입해주세요
         resulttext='' 
         context['imgname'] = imgname
         context['resulttext'] = resulttext

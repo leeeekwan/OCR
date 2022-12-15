@@ -22,7 +22,7 @@
 
 
 </div>
-<div style="width:30%" id="kim">
+<div style="width:30%" id="resident">
     개인 정보
 
 
@@ -42,17 +42,17 @@
 $(document).ready(function(){
     $('#army').click(function(){
         
-        location.href='/coocr_upload/army'
+        location.href='/coocr_upload/army/{{idx}}'
 
     })
     $('#body').click(function(){
         
-        location.href='/coocr_upload/body'
+        location.href='/coocr_upload/body/{{idx}}'
 
     })
-    $('#kim').click(function(){
+    $('#resident').click(function(){
         
-        location.href='/coocr_upload/kim'
+        location.href='/coocr_upload/resident/{{idx}}'
 
     })
 
