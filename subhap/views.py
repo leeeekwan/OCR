@@ -114,7 +114,9 @@ def ocrarmy(request):
             # subhap\ocrtools\armyOCR\easy 경로에서 army.py 에서 call_army를 호출 경로를 보내줌
 
             resulttext = call_army(path)    
-            # resulttext = call_army(path, imgname)    
+            # resulttext = call_army(path, imgname)   
+            context['resulttext']=resulttext 
+            context['imgname']=imgname
 
             # ---------------------------------------------------
 

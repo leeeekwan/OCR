@@ -37,8 +37,8 @@ def get_files(path):
 
 
 
-# def call_army(path):
-def call_army(path, imgname):
+def call_army(path):
+# def call_army(path, imgname):
 
 
     # Using custom model
