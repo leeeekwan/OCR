@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Employees
 from PIL import Image
 from django.core.files.storage import FileSystemStorage
-import pytesseract
+
 from .ocrtools.resume import naverclova
 
 # Create your views here.
