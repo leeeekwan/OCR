@@ -11,14 +11,22 @@
     <a href="/coocr_upload"> {{name}}사원의 인사 카드</a>
 </h1>
 
-
-<div id="army">
+<div style="display:flex">
+<div style="width:25%;" id="army">
     병역 정보
 
 
 </div>
-<div id="body">
+<div style="width:30%" id="body">
     신체 정보
+
+
+</div>
+<div style="width:30%" id="kim">
+    개인 정보
+
+
+</div>
 
 
 </div>
@@ -40,6 +48,11 @@ $(document).ready(function(){
     $('#body').click(function(){
         
         location.href='/coocr_upload/body'
+
+    })
+    $('#kim').click(function(){
+        
+        location.href='/coocr_upload/kim'
 
     })
 
