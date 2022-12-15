@@ -9,9 +9,6 @@ from .ocrtools.resume import naverclova
 #------------------------------------------------------
 # 병역문서 인식을 위해 필요한 import 들
 from easyocr.easyocr import *
-from imutils.perspective import four_point_transform
-from imutils.contours import sort_contours
-import imutils
 import cv2
 import requests
 import numpy as np
