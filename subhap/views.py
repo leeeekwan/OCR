@@ -6,7 +6,7 @@ from django.core.files.storage import FileSystemStorage
 import pytesseract
 from .ocrtools.resume import naverclova
 from .ocrtools.body import title_read
-
+from .ocrtools.resident import resident
 
 
 #------------------------------------------------------
@@ -196,10 +196,10 @@ def ocrresident(request,i):
             #resulttext = pytesseract.image_to_string(imgfile, lang='kor')
             #지금은 파이테서렉트 쓴것이 리절트 텍스트 
             #혜지님의 모듈 결과를 resulttext에 대입해주세요
-        resulttext='' 
+        resulttext= resident(imgfile)
         context['imgname'] = imgname
         context['resulttext'] = resulttext
 
 
-    return render(request,'ocrbody.html',context)
+    return render(request,'ocrresident.html',context)
 
