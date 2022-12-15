@@ -3,6 +3,7 @@ import sys
 import cv2
 import easyocr
 import matplotlib.pyplot as plt
+import numpy as np
 from PIL import ImageFont, Image, ImageDraw
 plt.style.use('seaborn-white')
 
@@ -46,10 +47,11 @@ xy_data = {
     'thirdY' : (1550, 1950)
           }
 
-data = {'date' : ''}   # date, disease, height, weight, eye_L, eye_R
 
 def title_read(img):
+    resulttext = {'date' : ''}   # date, disease, height, weight, eye_L, eye_R
 
+    img=np.array(img)
     img = cv2.resize(img, (0, 0), fx = 2, fy = 2)
 
     x = (250, 1500)
@@ -69,9 +71,9 @@ def title_read(img):
             ])
             
             for dt in result:
-                data['date'] += dt[1]
+                resulttext['date'] += dt[1]
 
-            print(data['date'])
+            print(resulttext['date'])
                         
                 
             break
@@ -86,9 +88,9 @@ def title_read(img):
             
             for i in range(len(result)):
                 if result[i][1] == "유질환":
-                    data['disease'] = result[i + 1][1]
+                    resulttext['disease'] = result[i + 1][1]
                     
-                    print(data['disease'])
+                    print(resulttext['disease'])
             
             break
         
@@ -102,20 +104,20 @@ def title_read(img):
                 
             for i in range(len(result)):
                 if "및 몸무게" in result[i][1]:
-                    data['height'] = result[i + 1][1]
-                    data['weight'] = result[i + 2][1]
+                    resulttext['height'] = result[i + 1][1]
+                    resulttext['weight'] = result[i + 2][1]
                 
-                    print(data['height'], data['height'])
+                    print(resulttext['height'], resulttext['height'])
                 
                 if '시력' in result[i][1]:
-                    data['eye_L'] = result[i + 1][1]
-                    data['eye_R'] = result[i + 2][1]
+                    resulttext['eye_l'] = result[i + 1][1]
+                    resulttext['eye_r'] = result[i + 2][1]
                 
-                    print(data['eye_L'], data['eye_R'])
+                    print(resulttext['eye_l'], resulttext['eye_r'])
             
             break
 
-    return data
+    return resulttext
 
 
 

@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from .models import Employees
+from .models import Body
 from PIL import Image
 from django.core.files.storage import FileSystemStorage
 
 from .ocrtools.resume import naverclova
+from .ocrtools.body import title_read
+
 
 # Create your views here.
 
@@ -69,7 +72,7 @@ def ocrarmy(request):
             print(imgname)
             imgfile = Image.open(f'./static/source/{imgname}')
             path=f'./static/source/{imgname}'
-            resulttext = pytesseract.image_to_string(imgfile, lang='kor')
+            #resulttext = pytesseract.image_to_string(imgfile, lang='kor')
             #지금은 파이테서렉트 쓴것이 리절트 텍스트 
             #종성님의 모듈 결과를 resulttext에 대입해주세요
         context['imgname'] = imgname
@@ -94,7 +97,7 @@ def ocrbody(request):
             print(imgname)
             imgfile = Image.open(f'./static/source/{imgname}')
             path=f'./static/source/{imgname}'
-            resulttext = pytesseract.image_to_string(imgfile, lang='kor')
+            resulttext = title_read(imgfile)
             #지금은 파이테서렉트 쓴것이 리절트 텍스트 
             #은수님의 모듈 결과를 resulttext에 대입해주세요
         context['imgname'] = imgname
@@ -102,3 +105,26 @@ def ocrbody(request):
 
 
     return render(request,'ocrbody.html',context)
+
+# 신체정보 insert 함수
+def insertBody(request):
+    # 필요한 data = 사원ID, 키, 몸무게, 시력_(좌, 우), 지병
+    emp_id = request.POST.get()
+    height = request.POST.get('height')
+    weight = request.POST.get('weight')
+    eye_l = request.POST.get('eye_l')
+    eye_r = request.POST.get('eye_r')
+    disease = request.POST.get('disease')
+
+    try:
+        Body.objects.create(emp=emp_id, height=height, weight=weight, eye_l=eye_l, eye_r=eye_r, disease=disease)
+        print('body table에 insert')
+    except Exception as e:
+        print(e)
+
+    return
+
+
+
+
+

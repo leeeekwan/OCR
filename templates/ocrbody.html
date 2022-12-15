@@ -36,6 +36,8 @@
                 <input type="submit" value="READ">
             </div>
         </form>
+
+        <form action="/coocr_insert/body" method="post" id="insertform" enctype="multipart/form-data">
             <div style="margin-top:200px ;">
                 <button id="save">save</button>
 
@@ -48,8 +50,24 @@
         
         <div style="margin-top:100px ;">
 
-            <textarea value="{{resulttext}}" style="width:400px;height:600px;font-size:20px;">{{resulttext}}</textarea>
-        </div>    
+            날짜 : <input type="text" name="date" value="{{resulttext.date}}">
+            키 : <input type="text" name="height" value="{{resulttext.height}}">
+            몸무게 : <input type="text" name="weight" value="{{resulttext.weight}}">
+            시력_좌 : <input type="text" name="eye_l" value="{{resulttext.eye_l}}">
+            시력_우 : <input type="text" name="eye_r" value="{{resulttext.eye_r}}">
+            질병 : <input type="text" name="disease" value="{{resulttext.disease}}">
+
+            <!-- <textarea value="{{resulttext}}" style="width:400px;height:600px;font-size:20px;">
+                날짜 : {{resulttext.date}}
+                키 : {{resulttext.height}}
+                몸무게 : {{resulttext.weight}}
+                시력_좌 : {{resulttext.eye_l}}
+                시력_우 : {{resulttext.eye_r}}
+                질병 : {{resulttext.disease}}
+            </textarea> -->
+        </div>   
+        
+        </form>
         
         
         
