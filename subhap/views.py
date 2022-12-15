@@ -101,4 +101,4 @@ def ocrbody(request):
         context['resulttext'] = resulttext
 
 
-    return render(request,'ocrarmy.html',context)
+    return render(request,'ocrbody.html',context)
