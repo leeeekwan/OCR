@@ -18,7 +18,7 @@
         {% if imgname == '' %}
         이미지를 READ해 주세요.
         {% else %}
-        <img src="/static/source/{{imgname}}" style="width:90%;" />
+        <img src="/static/source/document_army/{{imgname}}" style="width:90%;" />
         {% endif %}
     
         
@@ -27,16 +27,34 @@
     <div style="width:20%;">
 
 
-        <form action="/coocr_upload/" method="post" id="Coauthform" enctype="multipart/form-data">
+
+        <form action="/coocr_upload/army" method="post" id="Coauthform" enctype="multipart/form-data">
+            <!-- form 안에 있는 것들은 urls.py를 통해서 views.py의 ocrarmy로 간다 -->
+
             {% csrf_token %}
+
+
             <div style="margin-top:100px ;">
-                <input type="file" name="uploadfile" id="uploadfile" />
+
+                <input type="file" name="uploadfile" id="uploadfile" multiple="multiple"  />
+
             </div>
+
+
             <div style="margin-top:200px ;">
+                <!-- 읽어들이기 버튼 기능 -->
                 <input type="submit" value="READ">
             </div>
+
+
         </form>
+
+
+
+
             <div style="margin-top:200px ;">
+
+                <!-- 지금 이건 아무 기능도 없음 -->
                 <button id="save">save</button>
 
 
@@ -47,7 +65,7 @@
     <div style="width:33%;">
         
         <div style="margin-top:100px ;">
-
+            <!-- 여기서 결과는 context 를 불러오는 것으로 views.py에서 불러오는 것이다. -->
             <textarea value="{{resulttext}}" style="width:400px;height:600px;font-size:20px;">{{resulttext}}</textarea>
         </div>    
         

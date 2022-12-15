@@ -30,7 +30,7 @@
         <form action="/coocr_upload/body" method="post" id="Coauthform" enctype="multipart/form-data">
             {% csrf_token %}
             <div style="margin-top:100px ;">
-                <input type="file" name="uploadfile" id="uploadfile" />
+                <input type="file" name="uploadfile" id="uploadfile" multiple="multiple"  />
             </div>
             <div style="margin-top:200px ;">
                 <input type="submit" value="READ">
