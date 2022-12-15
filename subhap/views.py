@@ -118,7 +118,7 @@ def ocrarmy(request):
 
             # ---------------------------------------------------
 
-
+    return render(request,'ocrarmy.html',context)
 
 
 
