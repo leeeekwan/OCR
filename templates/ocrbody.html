@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>
+    {{menutitle}}
+    <a href="/info">결과창</a>
+</h1>
+
+
+<div style="display:flex">
+    <div style="width:45%;margin:50px;">
+        
+        {% if imgname == '' %}
+        이미지를 READ해 주세요.
+        {% else %}
+        <img src="/static/source/{{imgname}}" style="width:90%;" />
+        {% endif %}
+    
+        
+    </div>
+
+    <div style="width:20%;">
+
+
+        <form action="/coocr_upload/body" method="post" id="Coauthform" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div style="margin-top:100px ;">
+                <input type="file" name="uploadfile" id="uploadfile" />
+            </div>
+            <div style="margin-top:200px ;">
+                <input type="submit" value="READ">
+            </div>
+        </form>
+            <div style="margin-top:200px ;">
+                <button id="save">save</button>
+
+
+            </div>
+    </div>
+
+
+    <div style="width:33%;">
+        
+        <div style="margin-top:100px ;">
+
+            <textarea value="{{resulttext}}" style="width:400px;height:600px;font-size:20px;">{{resulttext}}</textarea>
+        </div>    
+        
+        
+        
+
+    </div>
+</div>
+<script>
+
+</script>
+</body>
+</html>
