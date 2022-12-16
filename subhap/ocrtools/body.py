@@ -7,6 +7,7 @@ import numpy as np
 from PIL import ImageFont, Image, ImageDraw
 plt.style.use('seaborn-white')
 
+
 #base_path = r'C:\Users\gram\Desktop\project_3'
 
 # def plt_imshow(bgr_img):
