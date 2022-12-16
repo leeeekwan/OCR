@@ -186,7 +186,11 @@ def ocrbody(request, i):
         context['first']=context['imgname'][0]
         context['remain']=context['imgname'][1:]
 
+
+        context['first']=context['imgname'][0]
+        context['remain']=context['imgname'][1:]
     return render(request,'ocrbody.html',context)
+
 
 
 # 신체정보 insert 함수
