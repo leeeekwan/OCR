@@ -29,6 +29,7 @@ urlpatterns = [
 
     # DB insert path
     path('coocr_insert/body/<int:i>', views.insertBody),
+    path('coocr_insert/army/<int:i>', views.insertArmy),
 
 ]
 

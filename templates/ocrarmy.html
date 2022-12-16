@@ -51,14 +51,31 @@
 
 
 
+        <form action="/coocr_insert/army/{{idx}}" method="post" id="insertarmy" enctype="multipart/form-data">
+
+            {% csrf_token %}
 
             <div style="margin-top:200px ;">
 
                 <!-- 지금 이건 아무 기능도 없음 -->
-                <button id="save">save</button>
+                <!-- {{a_info1}} -->
+                <input type="hidden" value="{{a_info1}}" name="a_info1">
+                <input type="hidden" value="{{a_info2}}" name="a_info2">
+                <input type="hidden" value="{{a_info3}}" name="a_info3">
+                <input type="hidden" value="{{a_info4}}" name="a_info4">
+                <input type="hidden" value="{{a_info5}}" name="a_info5">
+                <input type="hidden" value="{{a_info6}}" name="a_info6">
+                <input type="hidden" value="{{a_info7}}" name="a_info7">
+                <input type="hidden" value="{{a_info8}}" name="a_info8">
+
+                <input type="submit" value="save">
+                
 
 
             </div>
+
+        </form>
+
     </div>
 
 
@@ -67,6 +84,8 @@
         <div style="margin-top:100px ;">
             <!-- 여기서 결과는 context 를 불러오는 것으로 views.py에서 불러오는 것이다. -->
             <textarea value="{{resulttext}}" style="width:400px;height:600px;font-size:20px;">{{resulttext}}</textarea>
+            
+            
         </div>    
         
         
