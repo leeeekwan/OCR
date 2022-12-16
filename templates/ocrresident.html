@@ -27,7 +27,7 @@
     <div style="width:20%;">
 
 
-        <form action="/coocr_upload/resident" method="post" id="Coauthform" enctype="multipart/form-data">
+        <form action="/coocr_upload/resident{{idx}}" method="post" id="Coauthform" enctype="multipart/form-data">
             {% csrf_token %}
             <div style="margin-top:100px ;">
                 <input type="file" name="uploadfile" id="uploadfile" multiple="multiple"  />
