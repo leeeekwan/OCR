@@ -49,8 +49,9 @@ xy_data = {
           }
 
 
+resulttext = {'date' : ''}   # date, disease, height, weight, eye_L, eye_R
+
 def title_read(img):
-    resulttext = {'date' : ''}   # date, disease, height, weight, eye_L, eye_R
 
     img=np.array(img)
     img = cv2.resize(img, (0, 0), fx = 2, fy = 2)

@@ -28,7 +28,7 @@ urlpatterns = [
     path('coocr_upload/resident',views.ocrresident),
 
     # DB insert path
-    path('coocr_insert/body', views.insertBody),
+    path('coocr_insert/body/<int:i>', views.insertBody),
 
 ]
 
