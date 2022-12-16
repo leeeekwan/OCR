@@ -170,7 +170,8 @@ def ocrbody(request,i):
         
                 context['resulttext'] = resulttext
 
-
+        context['first']=context['imgname'][0]
+        context['remain']=context['imgname'][1:]
     return render(request,'ocrbody.html',context)
 
 
@@ -192,7 +193,7 @@ def insertBody(request):
 
     return
 
-def ocrresident(request):
+def ocrresident(request,i):
     context = {}
     context['idx'] = i
     if 'uploadfile' in request.FILES:
