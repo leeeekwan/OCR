@@ -179,7 +179,7 @@ def insertBody(request):
 
     return
 
-def ocrresident(request,i):
+def ocrresident(request):
     context = {}
     if 'uploadfile' in request.FILES:
         

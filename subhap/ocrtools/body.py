@@ -7,24 +7,24 @@ import numpy as np
 from PIL import ImageFont, Image, ImageDraw
 plt.style.use('seaborn-white')
 
-base_path = r'C:\Users\gram\Desktop\project_3'
+# base_path = r'C:\Users\gram\Desktop\project_3'
 
-def plt_imshow(bgr_img):
-    cvtImg = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2RGB)
-    plt.figure(figsize=(30, 15))
-    plt.imshow(cvtImg)
-    plt.show()
+# def plt_imshow(bgr_img):
+#     cvtImg = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2RGB)
+#     plt.figure(figsize=(30, 15))
+#     plt.imshow(cvtImg)
+#     plt.show()
 
 
-# 이미지 읽어오기
-body1 = cv2.imread(os.path.join(base_path, 'body4.jpg'))
-body1_re = cv2.resize(body1, (0, 0), fx = 2, fy = 2)
+# # 이미지 읽어오기
+# body1 = cv2.imread(os.path.join(base_path, 'body4.jpg'))
+# body1_re = cv2.resize(body1, (0, 0), fx = 2, fy = 2)
 
-body2 = cv2.imread(os.path.join(base_path, 'body5.jpg'))
-body2_re = cv2.resize(body2, (0, 0), fx = 2, fy = 2)
+# body2 = cv2.imread(os.path.join(base_path, 'body5.jpg'))
+# body2_re = cv2.resize(body2, (0, 0), fx = 2, fy = 2)
 
-body3 = cv2.imread(os.path.join(base_path, 'body6.jpg'))
-body3_re = cv2.resize(body3, (0, 0), fx = 2, fy = 2)
+# body3 = cv2.imread(os.path.join(base_path, 'body6.jpg'))
+# body3_re = cv2.resize(body3, (0, 0), fx = 2, fy = 2)
 
 
 def three_img(img1, img2, img3):
