@@ -171,7 +171,7 @@ def ocrbody(request, i):
                 name_old = i.name
             
                 fs = FileSystemStorage(location = 'static/source')
-                imgname= fs.save(f'src-{name_old}', uploadfile)
+                imgname= fs.save(f'src-{name_old}', i)
                 print(imgname)
                 context['imgname'].append(imgname)
                 imgfile = Image.open(f'./static/source/{imgname}')
@@ -183,6 +183,8 @@ def ocrbody(request, i):
         
         
                 context['resulttext'] = resulttext
+        context['first']=context['imgname'][0]
+        context['remain']=context['imgname'][1:]
 
     return render(request,'ocrbody.html',context)
 
@@ -204,10 +206,10 @@ def insertBody(request, i):
         print(e)
 
     context = {
-        'i' : i
+        'idx' : i
     }
 
-    return
+    return render(request, 'result.html', context)
 
 def ocrresident(request,i):
     context = {}
