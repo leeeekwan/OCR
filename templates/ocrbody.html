@@ -27,7 +27,7 @@
     <div style="width:20%;">
 
 
-        <form action="/coocr_upload/body" method="post" id="Coauthform" enctype="multipart/form-data">
+        <form action="/coocr_upload/body/{{i}}" method="post" id="Coauthform" enctype="multipart/form-data">
             {% csrf_token %}
             <div style="margin-top:100px ;">
                 <input type="file" name="uploadfile" id="uploadfile" multiple="multiple"  />
@@ -37,7 +37,7 @@
             </div>
         </form>
 
-        <form action="/coocr_insert/body" method="post" id="insertform" enctype="multipart/form-data">
+        <form action="/coocr_insert/body/" method="post" id="insertform" enctype="multipart/form-data">
             <div style="margin-top:200px ;">
                 <button id="save">save</button>
 

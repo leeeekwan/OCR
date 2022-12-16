@@ -1,12 +1,11 @@
 from django.shortcuts import render
-from .models import Employees
-from .models import Body
+from .models import Employees, Body, Info, Soldier
 from PIL import Image
 from django.core.files.storage import FileSystemStorage
 import pytesseract
 from .ocrtools.resume import naverclova
 from .ocrtools.body import title_read
-from .ocrtools.resident import resident
+
 
 
 #------------------------------------------------------
@@ -41,16 +40,31 @@ def home(request):
 
 
 def result(request,i):
-    emp= Employees.objects.get(id=i)
-    context={
-        'name':emp.name,
-        'idx':i
-        
 
+    msg = "정보를 불러올 수 없습니다."
+
+    emp= Employees.objects.get(id=i)
+
+    context = {
+        'name':emp.name,
+        'idx':i,
     }
 
+    try:
+        body = Body.objects.get(emp = i)
+        info = Info.objects.get(emp = i)
+        soldier = Soldier.objects.get(emp = i)
 
-    return render(request, 'result.html',context)
+        context['body'] = body
+        context['info'] = info
+        context['soldier'] = soldier
+
+    except Exception as e:
+
+        context['msg'] = msg
+
+
+    return render(request, 'result.html', context)
 
 def ocr(request):
     print('ocr')
@@ -136,7 +150,7 @@ def ocrarmy(request,i):
 
 
 
-def ocrbody(request,i):
+def ocrbody(request, i):
     context = {}
     if 'uploadfile' in request.FILES:
         
@@ -145,26 +159,26 @@ def ocrbody(request,i):
         if uploadfile != '':
             name_old = uploadfile.name
             
-            fs = FileSystemStorage(location = 'static/source')
+            fs = FileSystemStorage(location = 'static/source/body')
             imgname= fs.save(f'src-{name_old}', uploadfile)
             print(imgname)
-            imgfile = Image.open(f'./static/source/{imgname}')
-            path=f'./static/source/{imgname}'
-            resulttext = title_read(imgfile)
+            imgfile = Image.open(f'./static/source/body/{imgname}')
+            path = f'./static/source/body/{imgname}'
+            resulttext = title_read(path)
             #지금은 파이테서렉트 쓴것이 리절트 텍스트 
             #은수님의 모듈 결과를 resulttext에 대입해주세요
         resulttext='' 
         context['imgname'] = imgname
         context['resulttext'] = resulttext
-
+        context['i'] = i
 
     return render(request,'ocrbody.html',context)
 
 
 # 신체정보 insert 함수
-def insertBody(request):
+def insertBody(request, i):
     # 필요한 data = 사원ID, 키, 몸무게, 시력_(좌, 우), 지병
-    emp_id = request.POST.get()
+
     height = request.POST.get('height')
     weight = request.POST.get('weight')
     eye_l = request.POST.get('eye_l')
@@ -172,14 +186,18 @@ def insertBody(request):
     disease = request.POST.get('disease')
 
     try:
-        Body.objects.create(emp=emp_id, height=height, weight=weight, eye_l=eye_l, eye_r=eye_r, disease=disease)
+        Body.objects.create(emp_id=i, height=height, weight=weight, eye_l=eye_l, eye_r=eye_r, disease=disease)
         print('body table에 insert')
     except Exception as e:
         print(e)
 
+    context = {
+        'i' : i
+    }
+
     return
 
-def ocrresident(request):
+def ocrresident(request,i):
     context = {}
     if 'uploadfile' in request.FILES:
         
@@ -196,10 +214,10 @@ def ocrresident(request):
             #resulttext = pytesseract.image_to_string(imgfile, lang='kor')
             #지금은 파이테서렉트 쓴것이 리절트 텍스트 
             #혜지님의 모듈 결과를 resulttext에 대입해주세요
-        resulttext= resident(imgfile)
+        resulttext='' 
         context['imgname'] = imgname
         context['resulttext'] = resulttext
 
 
-    return render(request,'ocrresident.html',context)
+    return render(request,'ocrbody.html',context)
 
