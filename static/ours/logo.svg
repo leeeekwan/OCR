@@ -12,10 +12,10 @@
 	<polygon fill="#29ABE2" points="36.803,68.656 17.856,63.409 18.057,61.422 36.594,66.503 	"/>
 	<polygon fill="#29ABE2" points="37.204,72.781 17.462,67.322 17.663,65.335 36.995,70.634 	"/>
 </g>
-<text transform="matrix(1 0 0 1 43.375 31.1255)" fill="#2143A3" font-family="'AdobeGothicStd-Bold-KSCpc-EUC-H'" font-size="12">H</text>
-<text transform="matrix(1 0 0 1 51.8711 31.1255)" font-family="'AdobeGothicStd-Bold-KSCpc-EUC-H'" font-size="12">uman resource</text>
-<text transform="matrix(1 0 0 1 43.375 54.5234)" fill="#2143A3" font-family="'AdobeGothicStd-Bold-KSCpc-EUC-H'" font-size="12">A</text>
-<text transform="matrix(1 0 0 1 51.3311 54.5234)" font-family="'AdobeGothicStd-Bold-KSCpc-EUC-H'" font-size="12">utomatic</text>
-<text transform="matrix(1 0 0 1 43.375 77.1191)" fill="#2143A3" font-family="'AdobeGothicStd-Bold-KSCpc-EUC-H'" font-size="12">P</text>
-<text transform="matrix(1 0 0 1 50.5752 77.1191)" font-family="'AdobeGothicStd-Bold-KSCpc-EUC-H'" font-size="12">rogram</text>
+<text transform="matrix(1 0 0 1 43.375 31.1255)" fill="#2143A3" font-family="'AdobeGothicStd-Bold-KSCpc-EUC-H'" font-size="12" font-weight="bold">H</text>
+<text transform="matrix(1 0 0 1 51.8711 31.1255)" font-family="'AdobeGothicStd-Bold-KSCpc-EUC-H'" font-size="12" font-weight="bold">uman resource</text>
+<text transform="matrix(1 0 0 1 43.375 54.5234)" fill="#2143A3" font-family="'AdobeGothicStd-Bold-KSCpc-EUC-H'" font-size="12" font-weight="bold">A</text>
+<text transform="matrix(1 0 0 1 51.3311 54.5234)" font-family="'AdobeGothicStd-Bold-KSCpc-EUC-H'" font-size="12" font-weight="bold">utomatic</text>
+<text transform="matrix(1 0 0 1 43.375 77.1191)" fill="#2143A3" font-family="'AdobeGothicStd-Bold-KSCpc-EUC-H'" font-size="12" font-weight="bold">P</text>
+<text transform="matrix(1 0 0 1 50.5752 77.1191)" font-family="'AdobeGothicStd-Bold-KSCpc-EUC-H'" font-size="12" font-weight="bold"> ogram</text>
 </svg>
