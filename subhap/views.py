@@ -6,6 +6,8 @@ import pytesseract
 from .ocrtools.resume import naverclova
 from .ocrtools.body import title_read
 
+from django.shortcuts import redirect
+
 
 
 #------------------------------------------------------
@@ -42,7 +44,7 @@ def home(request):
 def result(request,i):
 
     msg = "정보를 불러올 수 없습니다."
-
+ 
     emp= Employees.objects.get(id=i)
 
     context = {
@@ -52,11 +54,22 @@ def result(request,i):
 
     try:
         body = Body.objects.get(emp = i)
-        info = Info.objects.get(emp = i)
-        soldier = Soldier.objects.get(emp = i)
-
         context['body'] = body
+
+    except Exception as e:
+
+        context['msg'] = msg
+
+    try:
+        info = Info.objects.get(emp = i)
         context['info'] = info
+
+    except Exception as e:
+
+        context['msg'] = msg
+
+    try:
+        soldier = Soldier.objects.get(emp = i)
         context['soldier'] = soldier
 
     except Exception as e:
@@ -213,7 +226,7 @@ def insertBody(request, i):
         'idx' : i
     }
 
-    return render(request, 'result.html', context)
+    return redirect(f'/info/{i}', context)
 
 def ocrresident(request,i):
     context = {}
