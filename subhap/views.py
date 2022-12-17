@@ -12,29 +12,13 @@ from django.shortcuts import redirect
 #------------------------------------------------------
 # 병역문서 인식을 위해 필요한 import 들
 from easyocr.easyocr import *
-import cv2
-import requests
 import numpy as np
-from PIL import ImageFont, ImageDraw, Image
-import os
-
-
-import sys
-
 import matplotlib.pyplot as plt
 plt.style.use('seaborn-white')
 
 from .ocrtools.armyOCR.easy.army import call_army
 # -------------------------------------------------
 # Create your views here.
-
-def layoutTest(request):
-
-    pass
-
-
-    return render(request, 'layoutTest.html')
-
 
 def home(request):
 
