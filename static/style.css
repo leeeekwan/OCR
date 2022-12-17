@@ -3,6 +3,7 @@
 #header {
     margin-left:auto; 
     margin-right:auto;
+    height: 200px;
 }
 
 #logo {
@@ -10,7 +11,11 @@
     width: 100px;
     height: 100px;
     margin-left: 10%;
-    background-color: #0070C0;
+}
+
+#logo img {
+    width: 250px;
+    height: 200px;
 }
 
 #ment {
@@ -31,7 +36,6 @@
     height: auto;
     margin-left:auto;
     margin-right:auto;
-    padding-top: 30px;
 }
 
 #employees th, #employees td {
