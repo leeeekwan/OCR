@@ -2,7 +2,6 @@ from django.shortcuts import render
 from .models import Employees, Body, Info, Soldier
 from PIL import Image
 from django.core.files.storage import FileSystemStorage
-import pytesseract
 from .ocrtools.resume import naverclova
 from .ocrtools.body import title_read
 

@@ -17,3 +17,13 @@
     text-align: center;
     padding: 8px 5px 0 5px;
 }
+
+#header{
+    background-color: #fff;
+    height: 102px;
+    width: 1080px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
