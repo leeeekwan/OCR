@@ -245,7 +245,7 @@ def insertArmy(request, i):
     }
 
 
-    return redirect(request, "ocrarmy.html", context)
+    return redirect(f'/info/{i}', context)
 
 
 
