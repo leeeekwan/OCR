@@ -331,7 +331,7 @@ def ocrresident(request,i):
         context['resulttext'] = resulttext
 
 
-    return render(request,'ocrbody.html',context)
+    return render(request,'ocrresident.html',context)
 
 def insertResume(request,i):
     # 필요한 data = 사원ID, 키, 몸무게, 시력_(좌, 우), 지병
@@ -355,4 +355,4 @@ def insertResume(request,i):
         'idx' : i
     }
 
-    return render(request, 'result.html', context)
+    return redirect(f'/info/{i}', context)
