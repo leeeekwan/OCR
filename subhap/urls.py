@@ -20,7 +20,7 @@ from . import views
 urlpatterns = [
    
     path('', views.home, name='home'),
-    path('coocr_upload/',views.ocr),
+    path('coocr_upload/<int:i>',views.ocr),
     path('info/<int:i>',views.result),
     path('coocr_upload/army/<int:i>',views.ocrarmy),
     path('coocr_upload/body/<int:i>',views.ocrbody),
@@ -33,6 +33,7 @@ urlpatterns = [
 
 
     path('coocr_upload/layoutTest', views.layoutTest)
+
 
 ]
 

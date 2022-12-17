@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Employees, Body, Info, Soldier
 from PIL import Image
 from django.core.files.storage import FileSystemStorage
-import pytesseract
 from .ocrtools.resume import naverclova
 from .ocrtools.body import title_read
+
+from django.shortcuts import redirect
 
 
 
@@ -50,7 +51,7 @@ def home(request):
 def result(request,i):
 
     msg = "정보를 불러올 수 없습니다."
-
+ 
     emp= Employees.objects.get(id=i)
 
     context = {
@@ -60,11 +61,22 @@ def result(request,i):
 
     try:
         body = Body.objects.get(emp = i)
-        info = Info.objects.get(emp = i)
-        soldier = Soldier.objects.get(emp = i)
-
         context['body'] = body
+
+    except Exception as e:
+
+        context['msg'] = msg
+
+    try:
+        info = Info.objects.get(emp = i)
         context['info'] = info
+
+    except Exception as e:
+
+        context['msg'] = msg
+
+    try:
+        soldier = Soldier.objects.get(emp = i)
         context['soldier'] = soldier
 
     except Exception as e:
@@ -74,13 +86,15 @@ def result(request,i):
 
     return render(request, 'result.html', context)
 
-def ocr(request):
-    print('ocr')
+def ocr(request,i):
+    print(i,'iiiii')
+    paths=[]
     context = {}
     context['menutitle'] = 'OCR READ'
     
     context['imgname']=[]
     resulttext = ''
+    context['idx']=i
     
     if 'uploadfile' in request.FILES:
         print(100)
@@ -97,13 +111,24 @@ def ocr(request):
                 context['imgname'].append(imgname)
                 imgfile = Image.open(f'./static/source/{imgname}') 
                 path=f'./static/source/{imgname}'
+                print(path)
+                paths.append(path)
                 
-                resulttext=naverclova(path)
         
-        context['resulttext'] = resulttext
+        result=naverclova(paths[1],paths[0])
+        context['resulttext1']=result[0]
+        context['resulttext2']=[]
+        a=result[1:]
         
-        
-    
+        for i in enumerate(a):
+            
+            context['resulttext2'].append(i)
+
+        print(context['resulttext2'])
+        context['first']=context['imgname'][0]
+        context['remain']=context['imgname'][1:]
+        context['len']=len(a)
+        print(context['len'])
 
     return render(request,'ocr.html',context)
 
@@ -281,7 +306,7 @@ def insertBody(request, i):
         'idx' : i
     }
 
-    return render(request, 'result.html', context)
+    return redirect(f'/info/{i}', context)
 
 def ocrresident(request,i):
     context = {}
@@ -308,3 +333,26 @@ def ocrresident(request,i):
 
     return render(request,'ocrbody.html',context)
 
+def insertResume(request,i):
+    # 필요한 data = 사원ID, 키, 몸무게, 시력_(좌, 우), 지병
+
+    length = int(request.POST.get('len'))
+    print(length)
+    qual=[]
+    gr=request.POST.get('gradu')
+    for l in range(length):
+        ja=request.POST.get('{}'.format(l))
+        print(ja)
+        qual.append(ja)
+
+    try:
+        Info.objects.create(emp_id=i,graduation=gr,license=qual)
+        print('info table에 insert')
+    except Exception as e:
+        print(e)
+
+    context = {
+        'idx' : i
+    }
+
+    return render(request, 'result.html', context)
