@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Employees, Body, Info, Soldier
 from PIL import Image
 from django.core.files.storage import FileSystemStorage
@@ -182,6 +182,7 @@ def ocrarmy(request,i):
 
 def insertArmy(request, i):
 
+    dbsaved = False
 
     # 이건 name으로 받아야 함
     a_info1 = request.POST.get("a_info1")
@@ -210,7 +211,6 @@ def insertArmy(request, i):
         # emp_id를 model.py에서 사용된 emp 로 하면 안된다.
         Soldier.objects.create(emp_id = i, kind = kind, s_rank = s_rank, number = number, state = state, depart = depart, on_date = on_date, out_date = out_date, discharge = discharge)
         # Soldier.objects.create(emp = i, kind = kind, s_rank = s_rank, number = number, state = state, depart = depart, on_date = on_date, out_date = out_date, discharge = discharge)
-    
     except Exception as e:
         print(e)
 
@@ -220,7 +220,7 @@ def insertArmy(request, i):
     }
 
 
-    return render(request, "ocrarmy.html", context)
+    return redirect(request, "ocrarmy.html", context)
 
 
 

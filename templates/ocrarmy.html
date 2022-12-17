@@ -5,14 +5,8 @@
     <title>Title</title>
 
 </head>
-
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
-
 <script>
-    
-    // $(".table").one('click',function(){
-    //     alert("지금부터 수정이 됩니다 내용 입력에 주의해주세요!")
-    // });
+
 
 </script>
 
@@ -79,6 +73,8 @@
 
                 
                 <input type="submit" value="save">
+                <!-- {{dbsucess}}
+                {{dberror}} -->
 
             </div>
 
@@ -100,7 +96,7 @@
             <!-- <form action="/coocr_insert/army/{{idx}}" method="post" id="insertarmy" enctype="multipart/form-data"> -->
                 <!-- 수정을 하려고 할 경우 경고차(alert) 를 이용하여 수정이 진행될 것임을 알려줄 필요성이 있다. -->
                 <!-- DB에 데이터를 저장한 경우 성공적으로 데이터가 전송되었음을 알리는 장치가 필요 -->
-                <!-- <table onclick="alert('수정 기능 사용!')"> -->
+                
                 <table class="table">
                     <tr>
                         <td >군별</td>
@@ -146,13 +142,15 @@
 
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-
-    // $(".table").one('click',function(){
-    //     alert("지금부터 수정이 됩니다 내용 입력에 주의해주세요!")
-    // });
+    // 수정하려는 input을 클릭하려는 경우 alert 작동, 전체 input 중 단 1번만 작동
+    $(".table").one('click',function(){
+        alert("지금부터 수정이 됩니다 내용 입력에 주의해주세요!")
+    });
 </script>
 </body>
 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+
+
 </html>
