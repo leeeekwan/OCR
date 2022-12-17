@@ -300,3 +300,129 @@ def ocrresident(request,i):
 
     return render(request,'ocrbody.html',context)
 
+
+from datetime import datetime
+def stats(request):
+    # employees.gender(성비)
+    # employees.birth(연령대)
+    # info.salary(연봉) (x:사원수, y:연봉)
+    # employees.hire_date입사율
+    # employees.class 퇴사율
+    # t년도의 퇴사율=t년도 퇴사자수/t-1년도 말의 재직자 수
+    
+    employees = Employees.objects.all()
+    
+    ##### 성비
+    women = Employees.objects.filter(gender=1)
+    men = Employees.objects.filter(gender=0)
+    per_women = len(women) / len(employees) * 100
+    per_men = len(men) / len(employees) * 100
+
+
+
+    ##### 연령대
+    birth = Employees.objects.filter().values('birth')
+    print("응애", datetime.today().year, type(datetime.today().year))
+
+    def get_age(birth):
+        born = "19" + birth[:2]
+        age = datetime.today().year - int(born) + 1
+        return age
+
+    age_20s = 0
+    age_30s = 0
+    age_40s = 0
+    age_50s = 0
+    age_60s = 0
+    age_else = 0
+
+    # employees들의 나이를 연령대별로 나누고 수를 도출
+    for i in birth:
+        # print(i['birth'], type(i['birth']))
+        age = get_age(i['birth'])  # int타입의 나이가 도출
+        div = int(age/10)
+        if div == 2:
+            age_20s += 1
+        elif div == 3:
+            age_30s += 1
+        elif div == 4:
+            age_40s += 1
+        elif div == 5:
+            age_50s += 1
+        elif div == 6:
+            age_60s += 1
+        else:
+            age_else += 1
+            
+    print(age_20s, age_30s, age_40s, age_50s, age_60s, age_else)
+
+
+
+    ##### 입사율 
+    hire = Employees.objects.filter().values('hire_date')
+
+    # 입사율 구하는 함수 ((t년도의 입사율=t년도 채용자수/t-1년도 말의 재직자 수))
+    def hire_rate(year):
+        hire_cnt = 0
+        worker_cnt = 0
+
+        for i in hire:
+            hire_year = i['hire_date'][:4]
+        
+            if hire_year < str(year):
+                worker_cnt += 1
+            elif hire_year == str(year):
+                hire_cnt += 1
+
+        print(year, "년도에 대한 입사율 : ", hire_cnt / worker_cnt * 100)
+        return hire_cnt / worker_cnt * 100
+
+    # print("입사율 : ",hire_rate(2020), hire_rate(2019), hire_rate(2018), hire_rate(2017), hire_rate(2016))
+
+    hire_rate_dic = {}
+    for i in range(6):
+        year = datetime.today().year - (i+1)
+        hire_rate_dic.setdefault(str(year), hire_rate(year))
+        
+    print("입사율 dic : ", hire_rate_dic)
+
+    # js for문 귀찮으니 미리 뺴놓자   
+    hr_2021 = hire_rate_dic['2021']
+    hr_2020 = hire_rate_dic['2020']
+    hr_2019 = hire_rate_dic['2019']
+    hr_2018 = hire_rate_dic['2018']
+    hr_2017 = hire_rate_dic['2017']
+    hr_2016 = hire_rate_dic['2016']
+
+
+
+    ##### 퇴사율
+    resign = Employees.objects.filter(class_field="퇴사")
+
+    # 퇴사율 구하는 함수 (t년도의 퇴사율=t년도 퇴사자수/t-1년도 말의 재직자 수)
+    # def resign_rate():
+
+
+
+
+    context = {
+        "employees": employees,
+        "per_women": per_women,
+        "per_men": per_men,
+        "age_20s": age_20s,
+        "age_30s": age_30s,
+        "age_40s": age_40s,
+        "age_50s": age_50s,
+        "age_60s": age_60s,
+        "age_else": age_else,
+        # "hire_rate": hire_rate,  # 딕셔너리
+        "hr_2021": hr_2021,
+        "hr_2020": hr_2020,
+        "hr_2019": hr_2019,
+        "hr_2018": hr_2018,
+        "hr_2017": hr_2017,
+        "hr_2016": hr_2016,
+
+    }
+
+    return render(request, 'stats.html', context)
