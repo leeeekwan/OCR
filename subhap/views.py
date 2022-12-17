@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Employees, Body, Info, Soldier
 from PIL import Image
 from django.core.files.storage import FileSystemStorage
@@ -86,13 +86,15 @@ def result(request,i):
 
     return render(request, 'result.html', context)
 
-def ocr(request):
-    print('ocr')
+def ocr(request,i):
+    print(i,'iiiii')
+    paths=[]
     context = {}
     context['menutitle'] = 'OCR READ'
     
     context['imgname']=[]
     resulttext = ''
+    context['idx']=i
     
     if 'uploadfile' in request.FILES:
         print(100)
@@ -109,13 +111,24 @@ def ocr(request):
                 context['imgname'].append(imgname)
                 imgfile = Image.open(f'./static/source/{imgname}') 
                 path=f'./static/source/{imgname}'
+                print(path)
+                paths.append(path)
                 
-                resulttext=naverclova(path)
         
-        context['resulttext'] = resulttext
+        result=naverclova(paths[1],paths[0])
+        context['resulttext1']=result[0]
+        context['resulttext2']=[]
+        a=result[1:]
         
-        
-    
+        for i in enumerate(a):
+            
+            context['resulttext2'].append(i)
+
+        print(context['resulttext2'])
+        context['first']=context['imgname'][0]
+        context['remain']=context['imgname'][1:]
+        context['len']=len(a)
+        print(context['len'])
 
     return render(request,'ocr.html',context)
 
@@ -194,6 +207,7 @@ def ocrarmy(request,i):
 
 def insertArmy(request, i):
 
+    dbsaved = False
 
     # 이건 name으로 받아야 함
     a_info1 = request.POST.get("a_info1")
@@ -222,7 +236,6 @@ def insertArmy(request, i):
         # emp_id를 model.py에서 사용된 emp 로 하면 안된다.
         Soldier.objects.create(emp_id = i, kind = kind, s_rank = s_rank, number = number, state = state, depart = depart, on_date = on_date, out_date = out_date, discharge = discharge)
         # Soldier.objects.create(emp = i, kind = kind, s_rank = s_rank, number = number, state = state, depart = depart, on_date = on_date, out_date = out_date, discharge = discharge)
-    
     except Exception as e:
         print(e)
 
@@ -232,7 +245,7 @@ def insertArmy(request, i):
     }
 
 
-    return render(request, "ocrarmy.html", context)
+    return redirect(request, "ocrarmy.html", context)
 
 
 
@@ -320,3 +333,26 @@ def ocrresident(request,i):
 
     return render(request,'ocrbody.html',context)
 
+def insertResume(request,i):
+    # 필요한 data = 사원ID, 키, 몸무게, 시력_(좌, 우), 지병
+
+    length = int(request.POST.get('len'))
+    print(length)
+    qual=[]
+    gr=request.POST.get('gradu')
+    for l in range(length):
+        ja=request.POST.get('{}'.format(l))
+        print(ja)
+        qual.append(ja)
+
+    try:
+        Info.objects.create(emp_id=i,graduation=gr,license=qual)
+        print('info table에 insert')
+    except Exception as e:
+        print(e)
+
+    context = {
+        'idx' : i
+    }
+
+    return render(request, 'result.html', context)
