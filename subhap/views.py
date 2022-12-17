@@ -27,6 +27,14 @@ from .ocrtools.armyOCR.easy.army import call_army
 # -------------------------------------------------
 # Create your views here.
 
+def layoutTest(request):
+
+    pass
+
+
+    return render(request, 'layoutTest.html')
+
+
 def home(request):
 
     employees = Employees.objects.all()

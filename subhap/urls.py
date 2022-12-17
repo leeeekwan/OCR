@@ -31,5 +31,8 @@ urlpatterns = [
     path('coocr_insert/body/<int:i>', views.insertBody),
     path('coocr_insert/army/<int:i>', views.insertArmy),
 
+
+    path('coocr_upload/layoutTest', views.layoutTest)
+
 ]
 
