@@ -136,3 +136,15 @@ a:visited {
     margin: 2px 3px 15px 3px;
 }
 
+#footer{
+    margin-bottom: 7px;
+    color: #888;
+    text-align: center;
+}
+
+#footer{
+    content: "l";
+    display: inline-block;
+    color: #ccc;
+    margin: 0 7px;
+}
