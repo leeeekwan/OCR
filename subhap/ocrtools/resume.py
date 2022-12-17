@@ -31,15 +31,10 @@ def plt_imshow_bgr(bgr_img):
 
 # path1='./minsu2.png'
 
-def naverclova(path):
+def naverclova(path,path1):
     resulttext=[]
-    # img=np.array(img)
-    # img=io.BytesIO(img)
-    files1=[('file',open(path,'rb'))]
-    #src3 = cv2.imread(fy)
-    #print(src3.shape)
-    #print(type(plt_imshow_bgr(src3)))
-    #print(type(src3))
+    files=[('file',open(path,'rb'))]
+    files1=[('file',open(path1,'rb'))]
     api_url = 'https://byoawp590b.apigw.ntruss.com/custom/v1/19592/c2e2067f630cd03dc609abedf56e14f81826e57380d0f5c33daec73fb634b1a7/general'
     secret_key = 'R0lwV2NjTlVCbWlvRHBlQWVSQmxtSlBSZldHc1BIS0I='
     request_json = {'images': [{'format': 'jpg',
@@ -59,52 +54,51 @@ def naverclova(path):
 
     #우리가 보내는것은 리쿼스트 그리고 그 유알엘이 우리한테 주는건 리스판스
     response1=requests.request("POST",api_url,headers=headers,data=payload, files=files1)
-    #response = requests.request("POST", api_url, headers=headers, data=payload, files=files)
+    response = requests.request("POST", api_url, headers=headers, data=payload, files=files)
 
-    #result = response.json()
+    result = response.json() #minsu2
     result1=response1.json()
-    # for i in result['images'][0]['fields']:
-    #     if i['inferText']=='인턴·대외활동':
-    #         #print(i['inferText'])
-    #         pt11=int(i['boundingPoly']['vertices'][0]['x'])
-    #         bot=int(i['boundingPoly']['vertices'][0]['y'])
-    #         print(i)
-    #         pt21=int(i['boundingPoly']['vertices'][2]['x'])
-    #         pt22=int(i['boundingPoly']['vertices'][2]['y'])
-    #     if i['inferText']=='학력':
-    #         #print(i['inferText'])
-    #         pt11=int(i['boundingPoly']['vertices'][0]['x'])
-    #         pt12=int(i['boundingPoly']['vertices'][0]['y'])
-    #         print(i)
-    #         pt21=int(i['boundingPoly']['vertices'][2]['x'])
-    #         up=int(i['boundingPoly']['vertices'][2]['y'])
-    # print(up)
-    # print(bot)
-    # ch=''
-    # for i in result['images'][0]['fields']:
-    #     if up<int(i['boundingPoly']['vertices'][0]['y'])<bot:
-    #         ch+=i['inferText']
-    #     if '대학교' in  i['inferText']:
-    #         uni=i['inferText']
-    #         print(uni)
-    # #cv2.rectangle(src3, pt1=(pt11,pt12), pt2=(pt21,pt22),color=(255,0,0), thickness=2)
-    # #   cv2.rectangle(src3, pt1=(pt11,pt12), pt2=(pt21,pt22),color=(255,0,0), thickness=2)
-    # #plt_imshow_bgr(src3)
-    #     if i['inferText'] == '학력':
-    #         st=i['boundingPoly']['vertices'][0]['y']
-    #         print(st)
-    # char=''
-    # for i in result['images'][0]['fields']:
-    #     if bot < i['boundingPoly']['vertices'][0]['y']< st:
+   
+    for i in result1['images'][0]['fields']:
+        if i['inferText']=='인턴·대외활동':
+            print('인턴 대외 활동')
+            pt11=int(i['boundingPoly']['vertices'][0]['x'])
+            bot=int(i['boundingPoly']['vertices'][0]['y'])
             
-    #             char+=i['inferText']
-    #             char+=' '
-                
-    # print(char)
+            pt21=int(i['boundingPoly']['vertices'][2]['x'])
+            pt22=int(i['boundingPoly']['vertices'][2]['y'])
+        if i['inferText']=='학력':
+            print('학력')
+            pt11=int(i['boundingPoly']['vertices'][0]['x'])
+            pt12=int(i['boundingPoly']['vertices'][0]['y'])
+            print(i)
+            pt21=int(i['boundingPoly']['vertices'][2]['x'])
+            up=int(i['boundingPoly']['vertices'][2]['y'])
+    print(up)
+    print(bot)
+    ch=''
+    for i in result1['images'][0]['fields']:
+        if up<int(i['boundingPoly']['vertices'][0]['y'])<bot:
+            ch+=i['inferText']
+   
+        if '대학교' in  i['inferText']:
+            uni=i['inferText']
+            #print(uni)
+    #cv2.rectangle(src3, pt1=(pt11,pt12), pt2=(pt21,pt22),color=(255,0,0), thickness=2)
+    #   cv2.rectangle(src3, pt1=(pt11,pt12), pt2=(pt21,pt22),color=(255,0,0), thickness=2)
+    #plt_imshow_bgr(src3)
+        if i['inferText'] == '학력':
+            st=i['boundingPoly']['vertices'][0]['y']
+            #print(st)
+
+    print(ch,'ch')
+    
+    resulttext.append(ch)          
+   
     
 
 
-    for i in result1['images'][0]['fields']:
+    for i in result['images'][0]['fields']:
         
     
         if i['inferText']=='자격증':
@@ -117,7 +111,7 @@ def naverclova(path):
             
 
     ja=''
-    for i in result1['images'][0]['fields']:
+    for i in result['images'][0]['fields']:
         if up<i['boundingPoly']['vertices'][0]['y']<bot:
         
             
