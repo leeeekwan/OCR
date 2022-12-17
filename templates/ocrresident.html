@@ -1,84 +1,86 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'layout.html' %}
+{% load static %}
 
-<h1>
-    {{menutitle}}
-    <a href="/info">결과창</a>
-</h1>
+    {% block title %}
+        <title>이력서 OCR</title>
+    {% endblock title %}
 
+    {% block content %}
 
-<div style="display:flex">
-    <div style="width:45%;margin:50px;">
-        
-        {% if imgname == '' %}
-        이미지를 READ해 주세요.
-        {% else %}
-        <img src="/static/source/{{imgname}}" style="width:90%;" />
-        {% endif %}
-    
-        
-    </div>
-
-    <div style="width:20%;">
+        <h1>
+            {{menutitle}}
+            <a href="/info">결과창</a>
+        </h1>
 
 
-        <form action="/coocr_upload/resident/{{idx}}" method="post" id="Coauthform" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div style="margin-top:100px ;">
-                <input type="file" name="uploadfile" id="uploadfile" multiple="multiple">
+        <div style="display:flex">
+            <div style="width:45%;margin:50px;">
+                
+                {% if imgname == '' %}
+                이미지를 READ해 주세요.
+                {% else %}
+                <img src="/static/source/{{imgname}}" style="width:90%;" />
+                {% endif %}
+            
+                
             </div>
-            <div style="margin-top:200px ;">
-                <input type="submit" value="READ">
+
+            <div style="width:20%;">
+
+
+                <form action="/coocr_upload/resident/{{idx}}" method="post" id="Coauthform" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div style="margin-top:100px ;">
+                        <input type="file" name="uploadfile" id="uploadfile" multiple="multiple">
+                    </div>
+                    <div style="margin-top:200px ;">
+                        <input type="submit" value="READ">
+                    </div>
+                </form>
+                    <div style="margin-top:200px ;">
+                        <button id="save">save</button>
+
+
+                    </div>
             </div>
-        </form>
-            <div style="margin-top:200px ;">
-                <button id="save">save</button>
 
+
+            <div style="width:33%;">
+                
+                <div style="margin-top:100px ;">
+                    <table class="table">
+                        <tr>
+                            <td>이름</td>
+                            <td><input type="text" name="" id="" value="{{resulttext.name}}"></td>
+                        </tr>
+                        <tr>
+                            <td>주민등록번호</td>
+                            <td><input type="text" name="" id="" value="{{resulttext.resi_num}}"></td>
+                        </tr>
+                        <tr>
+                            <td>현주소</td>
+                            <td><textarea value="{{resulttext.addr}}" style="width:300px;height:100px;font-size:15px;resize:none;">{{resulttext.addr}}</textarea></td>
+                        </tr>
+                        <tr>
+                            <td>발급일자</td>
+                            <td><input type="text" name="" id="" value="{{resulttext.issue_date}}"></td>
+                        </tr>
+                    </table>
+                </div>
+                    <!-- <textarea value="{{resulttext}}" style="width:400px;height:600px;font-size:20px;">{{resulttext}}</textarea> -->
+                
+                
 
             </div>
-    </div>
-
-
-    <div style="width:33%;">
-        
-        <div style="margin-top:100px ;">
-            <table class="table">
-                <tr>
-                    <td>이름</td>
-                    <td><input type="text" name="" id="" value="{{resulttext.name}}"></td>
-                </tr>
-                <tr>
-                    <td>주민등록번호</td>
-                    <td><input type="text" name="" id="" value="{{resulttext.resi_num}}"></td>
-                </tr>
-                <tr>
-                    <td>현주소</td>
-                    <td><textarea value="{{resulttext.addr}}" style="width:300px;height:100px;font-size:15px;resize:none;">{{resulttext.addr}}</textarea></td>
-                </tr>
-                <tr>
-                    <td>발급일자</td>
-                    <td><input type="text" name="" id="" value="{{resulttext.issue_date}}"></td>
-                </tr>
-            </table>
         </div>
-            <!-- <textarea value="{{resulttext}}" style="width:400px;height:600px;font-size:20px;">{{resulttext}}</textarea> -->
-        
-        
+    {% endblock content %}
 
-    </div>
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    // 수정하려는 input을 클릭하려는 경우 alert 작동, 전체 input 중 단 1번만 작동
-    $(".table").one('click',function(){
-        alert("지금부터 수정이 됩니다 내용 입력에 주의해주세요!")
-    });
-</script>
-</body>
-</html>
+    {% block script %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            // 수정하려는 input을 클릭하려는 경우 alert 작동, 전체 input 중 단 1번만 작동
+            $(".table").one('click',function(){
+                alert("지금부터 수정이 됩니다 내용 입력에 주의해주세요!")
+            });
+        </script>
+    {% endblock script %}
