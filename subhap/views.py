@@ -2,9 +2,10 @@ from django.shortcuts import render
 from .models import Employees, Body, Info, Soldier
 from PIL import Image
 from django.core.files.storage import FileSystemStorage
-import pytesseract
 from .ocrtools.resume import naverclova
 from .ocrtools.body import title_read
+
+from django.shortcuts import redirect
 
 
 
@@ -27,6 +28,14 @@ from .ocrtools.armyOCR.easy.army import call_army
 # -------------------------------------------------
 # Create your views here.
 
+def layoutTest(request):
+
+    pass
+
+
+    return render(request, 'layoutTest.html')
+
+
 def home(request):
 
     employees = Employees.objects.all()
@@ -42,7 +51,7 @@ def home(request):
 def result(request,i):
 
     msg = "정보를 불러올 수 없습니다."
-
+ 
     emp= Employees.objects.get(id=i)
 
     context = {
@@ -52,11 +61,22 @@ def result(request,i):
 
     try:
         body = Body.objects.get(emp = i)
-        info = Info.objects.get(emp = i)
-        soldier = Soldier.objects.get(emp = i)
-
         context['body'] = body
+
+    except Exception as e:
+
+        context['msg'] = msg
+
+    try:
+        info = Info.objects.get(emp = i)
         context['info'] = info
+
+    except Exception as e:
+
+        context['msg'] = msg
+
+    try:
+        soldier = Soldier.objects.get(emp = i)
         context['soldier'] = soldier
 
     except Exception as e:
@@ -122,20 +142,20 @@ def ocr(request,i):
 
 def ocrarmy(request,i):
     context = {}
-    print('jfj')
-    print(i)
-    print('ocrarmy')
+    # print('jfj')
+    # print(i)
+    # print('ocrarmy')
     if 'uploadfile' in request.FILES:
         
         
         # uploadfile은 html에서 불러오는 것
         uploadfile = request.FILES.get('uploadfile', '')
         print(uploadfile)
-        print('asdfljasdflkj')
+        # print('asdfljasdflkj')
             
         if uploadfile != '':
             name_old = uploadfile.name
-            print('제발')
+            # print('제발')
 
 
             # 이미지를 불러오는 경로도 좀 손을 봐야 한다
@@ -156,18 +176,78 @@ def ocrarmy(request,i):
             # 만들어둔 EasyOCR을 부르는 부분
             # subhap\ocrtools\armyOCR\easy 경로에서 army.py 에서 call_army를 호출 경로를 보내줌
 
-            resulttext = call_army(path)    
-            # resulttext = call_army(path, imgname)    
+            # resulttext = call_army(path)    
+            # resulttext = call_army(path, imgname)
+            a_info = call_army(path)
+            print(a_info)
+            a_text = "군별 : "+a_info['군별']+"\n"+"계급 : "+a_info['계급']+"\n"+"군번 : "+a_info['군번']+"\n"+"역중 : "+a_info['역중']+"\n"+"병과 : "+a_info['병과']+"\n"+"입영일 : "+a_info['입영일']+"\n"+"전역일 : "+a_info['전역일']+"\n"+"전역사유 : "+a_info['전역']
+
 
             # ---------------------------------------------------
 
         context['imgname'] = imgname
-        context['resulttext'] = resulttext
+        # context['resulttext'] = resulttext
+        context['resulttext'] = a_text
+        context['a_info1'] = a_info['군별']
+        context['a_info2'] = a_info['계급']
+        context['a_info3'] = a_info['군번']
+        context['a_info4'] = a_info['역중']
+        context['a_info5'] = a_info['병과']
+        context['a_info6'] = a_info['입영일']
+        context['a_info7'] = a_info['전역일']
+        context['a_info8'] = a_info['전역']
+
     context['idx'] = i
 
 
 
     return render(request,'ocrarmy.html',context)
+
+
+
+def insertArmy(request, i):
+
+
+    # 이건 name으로 받아야 함
+    a_info1 = request.POST.get("a_info1")
+    a_info2 = request.POST.get("a_info2")
+    a_info3 = request.POST.get("a_info3")
+    a_info4 = request.POST.get("a_info4")
+    a_info5 = request.POST.get("a_info5")
+    a_info6 = request.POST.get("a_info6")
+    a_info7 = request.POST.get("a_info7")
+    a_info8 = request.POST.get("a_info8")
+
+    print(a_info1)
+    
+
+    kind = a_info1
+    s_rank = a_info2
+    number = a_info3
+    state = a_info4
+    depart = a_info5
+    on_date = a_info6
+    out_date = a_info7
+    discharge = a_info8
+
+
+    try:
+        # emp_id를 model.py에서 사용된 emp 로 하면 안된다.
+        Soldier.objects.create(emp_id = i, kind = kind, s_rank = s_rank, number = number, state = state, depart = depart, on_date = on_date, out_date = out_date, discharge = discharge)
+        # Soldier.objects.create(emp = i, kind = kind, s_rank = s_rank, number = number, state = state, depart = depart, on_date = on_date, out_date = out_date, discharge = discharge)
+    
+    except Exception as e:
+        print(e)
+
+
+    context = {
+        'idx' : i
+    }
+
+
+    return render(request, "ocrarmy.html", context)
+
+
 
 
 
@@ -226,7 +306,7 @@ def insertBody(request, i):
         'idx' : i
     }
 
-    return render(request, 'result.html', context)
+    return redirect(f'/info/{i}', context)
 
 def ocrresident(request,i):
     context = {}
