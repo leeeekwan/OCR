@@ -22,22 +22,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for i in employees %}
-                            <tr>
-                                <td>{{ i.id }}</td>
-                                <td>{{ i.image }}</td>
-                                <td><a href="/info/{{i.id}}">{{ i.name }}</a></td>
-                                <td>{{ i.depart }}</td>
-                                <td>{{ i.class_field }}</td>
-                                <td>{{ i.phone }}</td>
-                                <td>{{ i.hire_date }}</td>
-                                <td>{{ i.email }}</td>
-                            </tr>
-                        {% endfor %}
+                    {% for i in employees %}
+                        <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.image }}</td>
+                            <td><a href="/info/{{i.id}}">{{ i.name }}</a></td>
+                            <td>{{ i.depart }}</td>
+                            <td>{{ i.class_field }}</td>
+                            <td>{{ i.phone }}</td>
+                            <td>{{ i.hire_date }}</td>
+                            <td>{{ i.email }}</td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             {% else %}
                 <h2> 정보가 없습니다 </h2>
             {% endif %}
-        </div>
+    </div>
+    
+    <div>
+        <button type="button" onclick="location.href='/stats'" style="width:40%; text-align: center; font-size:1em; padding:15px">통계보기</button>
+    </div>
     {% endblock content %}
+
