@@ -112,6 +112,28 @@
                         <h4>{{msg}}</h4>
                     {% endif %}
                 </div>
+
+                <div id="resi">
+                    <h3>사원 정보</h3>
+                    {% if employees != None %}
+                        <table id="result_table">
+                            <tr>
+                                <th>이름<th>
+                                <td>{{employees.name}}</td>
+                            </tr>
+                            <tr>
+                                <th>주민등록번호</th>
+                                <td>{{employees.resi_num}}</td>
+                            </tr>
+                            <tr>
+                                <th>현주소</th>
+                                <td>{{employees.addr}}</td>
+                            </tr>
+                        </table>
+                    {% else %}
+                        <h4>{{msg}}</h4>
+                    {% endif %}
+                </div>
                 
                 
             </div>
@@ -136,6 +158,11 @@
         
             })
             $('#resident').click(function(){
+                
+                location.href='/coocr_upload/resident/{{idx}}'
+        
+            })
+            $('#resi').click(function(){
                 
                 location.href='/coocr_upload/resident/{{idx}}'
         

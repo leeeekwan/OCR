@@ -45,6 +45,14 @@ def result(request,i):
     }
 
     try:
+        employees = Employees.objects.get(id = i)
+        context['employees'] = employees
+
+    except Exception as e:
+
+        context['msg'] = msg
+
+    try:
         body = Body.objects.get(emp = i)
         context['body'] = body
 
@@ -324,6 +332,24 @@ def ocrresident(request,i):
 
 
     return render(request,'ocrresident.html',context)
+
+def insertResident(request, i):
+
+    resi_num = request.POST.get("r_resi_num")
+    addr = request.POST.get("r_addr")
+
+    print("잘받아오나?", i, resi_num, addr)
+
+    try:
+        Employees.objects.filter(id=i).update(resi_num=resi_num, addr=addr)
+    except Exception as e:
+        print(e)
+
+    context = {
+        'idx' : i
+    }
+
+    return redirect(f'/info/{i}', context)
 
 
 from datetime import datetime

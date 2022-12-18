@@ -25,13 +25,13 @@ urlpatterns = [
     path('coocr_upload/army/<int:i>',views.ocrarmy),
     path('coocr_upload/body/<int:i>',views.ocrbody),
     path('coocr_upload/resident/<int:i>',views.ocrresident),
-    path('coocr_upload/resident',views.ocrresident),
     path('stats/',views.stats),
 
     # DB insert path
     path('coocr_insert/body/<int:i>', views.insertBody),
     path('coocr_insert/army/<int:i>', views.insertArmy),
     path('coocr_insert/resume/<int:i>', views.insertResume),
+    path('coocr_insert/resident/<int:i>', views.insertResident),
 
 ]
 
