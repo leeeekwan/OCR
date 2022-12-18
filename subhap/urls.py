@@ -30,7 +30,7 @@ urlpatterns = [
     # DB insert path
     path('coocr_insert/body/<int:i>', views.insertBody),
     path('coocr_insert/army/<int:i>', views.insertArmy),
-
+    path('coocr_insert/resume/<int:i>', views.insertResume),
 
     path('coocr_upload/layoutTest', views.layoutTest)
 

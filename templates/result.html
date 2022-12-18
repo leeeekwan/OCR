@@ -8,12 +8,16 @@
     <!-- <link rel="stylesheet" href="/static/style.css"> -->
 </head>
 <body>
+    
     <div id="result_contents">
         <h1>
             {{menutitle}}
             <a href="/coocr_upload/{{idx}}"> {{name}}사원의 인사 카드</a>
+            <div style="width:250px">
+                <img src="/static/face/{{idx}}.png"  height="150" width="100">
+            </div>
         </h1>
-
+        
         <div>
             <div id="army">
                 <h3>병역 정보</h3>
@@ -103,7 +107,9 @@
                         </tr>
                         <tr>
                             <th>자격증</th>
-                            <td>{{info.license}}</td>
+                            {% for q in qual %}
+                            <td>{{q}}</td>
+                            {% endfor %}
                         </tr>
                     </table>
                 {% else %}
