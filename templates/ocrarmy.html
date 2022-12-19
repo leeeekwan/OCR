@@ -1,156 +1,144 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+{% extends 'layout.html' %}
+{% load static %}
 
-</head>
-<script>
+    {% block title %}
+        <title>병역 OCR</title>
+    {% endblock title %}
 
-
-</script>
-
-<body>
-
-<h1>
-    {{menutitle}}
-    <a href="/info">결과창</a>
-</h1>
+    {% block content %}
+        <h1>
+            {{menutitle}}
+            <a href="/info">결과창</a>
+        </h1>
 
 
-<div style="display:flex">
-    <div style="width:45%;margin:50px;">
-        
-        {% if imgname == '' %}
-        이미지를 READ해 주세요.
-        {% else %}
-        <img src="/static/source/document_army/{{imgname}}" style="width:90%;" />
-        {% endif %}
-    
-        
-    </div>
-
-    <div style="width:20%;">
-
-      
-
-        <form action="/coocr_upload/army/{{idx}}" method="post" id="Coauthform" enctype="multipart/form-data">
-            <!-- form 안에 있는 것들은 urls.py를 통해서 views.py의 ocrarmy로 간다 -->
-
-            {% csrf_token %}
-
-
-            <div style="margin-top:100px ;">
-
-                <input type="file" name="uploadfile" id="uploadfile" multiple="multiple"  />
-
-            </div>
-
-
-            <div style="margin-top:200px ;">
-                <!-- 읽어들이기 버튼 기능 -->
-                <input type="submit" value="READ">
-            </div>
-
-
-        </form>
-
-
-
-        <form action="/coocr_insert/army/{{idx}}" method="post" id="insertarmy" enctype="multipart/form-data">
-
-            {% csrf_token %}
-
-            <div style="margin-top:200px ;">
-            <!--<input type="hidden" value="{{a_info1}}" name="a_info1">
-                <input type="hidden" value="{{a_info2}}" name="a_info2">
-                <input type="hidden" value="{{a_info3}}" name="a_info3">
-                <input type="hidden" value="{{a_info4}}" name="a_info4">
-                <input type="hidden" value="{{a_info5}}" name="a_info5">
-                <input type="hidden" value="{{a_info6}}" name="a_info6">
-                <input type="hidden" value="{{a_info7}}" name="a_info7">
-                <input type="hidden" value="{{a_info8}}" name="a_info8"> -->
-
+        <div style="display:flex">
+            <div style="width:45%;margin:50px;">
                 
-                <input type="submit" value="save">
-                <!-- {{dbsucess}}
-                {{dberror}} -->
+                {% if imgname == '' %}
+                이미지를 READ해 주세요.
+                {% else %}
+                <img src="/static/source/document_army/{{imgname}}" style="width:90%;" />
+                {% endif %}
+            
+                
+            </div>
+
+            <div style="width:20%;">
+
+            
+
+                <form action="/coocr_upload/army/{{idx}}" method="post" id="Coauthform" enctype="multipart/form-data">
+                    <!-- form 안에 있는 것들은 urls.py를 통해서 views.py의 ocrarmy로 간다 -->
+
+                    {% csrf_token %}
+
+
+                    <div style="margin-top:100px ;">
+
+                        <input type="file" name="uploadfile" id="uploadfile" multiple="multiple"  />
+
+                    </div>
+
+
+                    <div style="margin-top:200px ;">
+                        <!-- 읽어들이기 버튼 기능 -->
+                        <input type="submit" value="READ">
+                    </div>
+
+
+                </form>
+
+
+
+                <form action="/coocr_insert/army/{{idx}}" method="post" id="insertarmy" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    <div style="margin-top:200px ;">
+                    <!--<input type="hidden" value="{{a_info1}}" name="a_info1">
+                        <input type="hidden" value="{{a_info2}}" name="a_info2">
+                        <input type="hidden" value="{{a_info3}}" name="a_info3">
+                        <input type="hidden" value="{{a_info4}}" name="a_info4">
+                        <input type="hidden" value="{{a_info5}}" name="a_info5">
+                        <input type="hidden" value="{{a_info6}}" name="a_info6">
+                        <input type="hidden" value="{{a_info7}}" name="a_info7">
+                        <input type="hidden" value="{{a_info8}}" name="a_info8"> -->
+
+                        
+                        <input type="submit" value="save">
+                        <!-- {{dbsucess}}
+                        {{dberror}} -->
+
+                    </div>
+
+                <!-- </form> -->
 
             </div>
 
-        <!-- </form> -->
 
-    </div>
-
-
-    <div style="width:33%;">
-        
-        <!-- <div style="margin-top:100px ;"> -->
-            <!-- 여기서 결과는 context 를 불러오는 것으로 views.py에서 불러오는 것이다. / 원본-->
-            <!-- <textarea value="{{resulttext}}" style="width:400px;height:600px;font-size:20px;">{{resulttext}}</textarea> -->
-
-        <!-- </div> -->
-
-
-        <div style="margin-top:100px ;">
-            <!-- <form action="/coocr_insert/army/{{idx}}" method="post" id="insertarmy" enctype="multipart/form-data"> -->
-                <!-- 수정을 하려고 할 경우 경고차(alert) 를 이용하여 수정이 진행될 것임을 알려줄 필요성이 있다. -->
-                <!-- DB에 데이터를 저장한 경우 성공적으로 데이터가 전송되었음을 알리는 장치가 필요 -->
+            <div style="width:33%;">
                 
-                <table class="table">
-                    <tr>
-                        <td >군별</td>
-                        <td><input type="text" name="a_info1" id="" value="{{a_info1}}"></td>
-                    </tr>
-                    <tr>
-                        <td>계급</td>
-                        <td><input type="text" name="a_info2" id="" value="{{a_info2}}"></td>
-                    </tr>
-                    <tr>
-                        <td>군번</td>
-                        <td><input type="text" name="a_info3" id="" value="{{a_info3}}"></td>
-                    </tr>
-                    <tr>
-                        <td>역중</td>
-                        <td><input type="text" name="a_info4" id="" value="{{a_info4}}"></td>
-                    </tr>
-                    <tr>
-                        <td>병과</td>
-                        <td><input type="text" name="a_info5" id="" value="{{a_info5}}"></td>
-                    </tr>
-                    <tr>
-                        <td>입영일</td>
-                        <td><input type="text" name="a_info6" id="" value="{{a_info6}}"></td>
-                    </tr>
-                    <tr>
-                        <td>전역일</td>
-                        <td><input type="text" name="a_info7" id="" value="{{a_info7}}"></td>
-                    </tr>
-                    <tr>
-                        <td>전역사유</td>
-                        <td><input type="text" name="a_info8" id="" value="{{a_info8}}"></td>
-                    </tr>
-                </table>
-            </form>
+                <!-- <div style="margin-top:100px ;"> -->
+                    <!-- 여기서 결과는 context 를 불러오는 것으로 views.py에서 불러오는 것이다. / 원본-->
+                    <!-- <textarea value="{{resulttext}}" style="width:400px;height:600px;font-size:20px;">{{resulttext}}</textarea> -->
+
+                <!-- </div> -->
+
+
+                <div style="margin-top:100px ;">
+                    <!-- <form action="/coocr_insert/army/{{idx}}" method="post" id="insertarmy" enctype="multipart/form-data"> -->
+                        <!-- 수정을 하려고 할 경우 경고차(alert) 를 이용하여 수정이 진행될 것임을 알려줄 필요성이 있다. -->
+                        <!-- DB에 데이터를 저장한 경우 성공적으로 데이터가 전송되었음을 알리는 장치가 필요 -->
+                        
+                        <table class="table">
+                            <tr>
+                                <td >군별</td>
+                                <td><input type="text" name="a_info1" id="" value="{{a_info1}}"></td>
+                            </tr>
+                            <tr>
+                                <td>계급</td>
+                                <td><input type="text" name="a_info2" id="" value="{{a_info2}}"></td>
+                            </tr>
+                            <tr>
+                                <td>군번</td>
+                                <td><input type="text" name="a_info3" id="" value="{{a_info3}}"></td>
+                            </tr>
+                            <tr>
+                                <td>역중</td>
+                                <td><input type="text" name="a_info4" id="" value="{{a_info4}}"></td>
+                            </tr>
+                            <tr>
+                                <td>병과</td>
+                                <td><input type="text" name="a_info5" id="" value="{{a_info5}}"></td>
+                            </tr>
+                            <tr>
+                                <td>입영일</td>
+                                <td><input type="text" name="a_info6" id="" value="{{a_info6}}"></td>
+                            </tr>
+                            <tr>
+                                <td>전역일</td>
+                                <td><input type="text" name="a_info7" id="" value="{{a_info7}}"></td>
+                            </tr>
+                            <tr>
+                                <td>전역사유</td>
+                                <td><input type="text" name="a_info8" id="" value="{{a_info8}}"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+
+            </div>
         </div>
-            
-            
-            
-        
-        
-        
 
-    </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    // 수정하려는 input을 클릭하려는 경우 alert 작동, 전체 input 중 단 1번만 작동
-    $(".table").one('click',function(){
-        alert("지금부터 수정이 됩니다 내용 입력에 주의해주세요!")
-    });
-</script>
-</body>
+    {% endblock content %}
 
-
-
-</html>
+    {% block script %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            // 수정하려는 input을 클릭하려는 경우 alert 작동, 전체 input 중 단 1번만 작동
+            $(".table").one('click',function(){
+                alert("지금부터 수정이 됩니다 내용 입력에 주의해주세요!")
+            });
+        </script>
+    {% endblock script %}

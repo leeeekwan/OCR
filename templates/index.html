@@ -20,35 +20,25 @@
                             <th>입사일</th>
                             <th>메일주소</th>
                         </tr>
-
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <h2> 정보가 없습니다 </h2>
-        {% endif %}
-    </div>
-</body>
-</html>
                     </thead>
                     <tbody>
-                        {% for i in employees %}
-                            <tr>
-                                <td>{{ i.id }}</td>
-                                <td>{{ i.image }}</td>
-                                <td><a href="/info/{{i.id}}">{{ i.name }}</a></td>
-                                <td>{{ i.depart }}</td>
-                                <td>{{ i.class_field }}</td>
-                                <td>{{ i.phone }}</td>
-                                <td>{{ i.hire_date }}</td>
-                                <td>{{ i.email }}</td>
-                            </tr>
-                        {% endfor %}
+                    {% for i in employees %}
+                        <tr>
+                            <td>{{ i.id }}</td>
+                            <td>{{ i.image }}</td>
+                            <td><a href="/info/{{i.id}}">{{ i.name }}</a></td>
+                            <td>{{ i.depart }}</td>
+                            <td>{{ i.class_field }}</td>
+                            <td>{{ i.phone }}</td>
+                            <td>{{ i.hire_date }}</td>
+                            <td>{{ i.email }}</td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             {% else %}
                 <h2> 정보가 없습니다 </h2>
             {% endif %}
-        </div>
+    </div>
+    
     {% endblock content %}
-

@@ -1,142 +1,141 @@
+{% extends 'layout.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <!-- <link rel="stylesheet" href="/static/style.css"> -->
-</head>
-<body>
-    <div id="result_contents">
-        <h1>
-            {{menutitle}}
-            <a href="/coocr_upload/{{idx}}"> {{name}}사원의 인사 카드</a>
-        </h1>
 
-        <div>
-            <div id="army">
-                <h3>병역 정보</h3>
-                {% if soldier != None %}
-                    <table id="result_table">
-                        <tr>
-                            <th>군별</th>
-                            <td>{{soldier.kind}}</td>
-                        </tr>
-                        <tr>
-                            <th>계급</th>
-                            <td>{{soldier.s_rank}}</td>
-                        </tr>
-                        <tr>
-                            <th>군번</th>
-                            <td>{{soldier.number}}</td>
-                        </tr>
-                        <tr>
-                            <th>역종</th>
-                            <td>{{soldier.state}}</td>
-                        </tr>
-                        <tr>
-                            <th>병과</th>
-                            <td>{{soldier.depart}}</td>
-                        </tr>
-                        <tr>
-                            <th>입대일</th>
-                            <td>{{soldier.on_date}}</td>
-                        </tr>
-                        <tr>
-                            <th>전역일</th>
-                            <td>{{soldier.out_date}}</td>
-                        </tr>
-                        <tr>
-                            <th>전역사유</th>
-                            <td>{{soldier.discharge}}</td>
-                        </tr>
-                    </table>
-                {% else %}
-                    <h4>{{msg}}</h4>
-                {% endif %}
+    {% block title %}
+        <title>HAP(인사등록프로그램)</title>
+    {% endblock title %}
+
+    {% block content %}
+        <div id="result_contents">
+            <h1>
+                {{menutitle}}
+                <a href="/coocr_upload/{{idx}}"> {{name}}사원의 인사 카드</a>
+            </h1>
+
+            <div>
+                <div id="army">
+                    <h3>병역 정보</h3>
+                    {% if soldier != None %}
+                        <table id="result_table">
+                            <tr>
+                                <th>군별</th>
+                                <td>{{soldier.kind}}</td>
+                            </tr>
+                            <tr>
+                                <th>계급</th>
+                                <td>{{soldier.s_rank}}</td>
+                            </tr>
+                            <tr>
+                                <th>군번</th>
+                                <td>{{soldier.number}}</td>
+                            </tr>
+                            <tr>
+                                <th>역종</th>
+                                <td>{{soldier.state}}</td>
+                            </tr>
+                            <tr>
+                                <th>병과</th>
+                                <td>{{soldier.depart}}</td>
+                            </tr>
+                            <tr>
+                                <th>입대일</th>
+                                <td>{{soldier.on_date}}</td>
+                            </tr>
+                            <tr>
+                                <th>전역일</th>
+                                <td>{{soldier.out_date}}</td>
+                            </tr>
+                            <tr>
+                                <th>전역사유</th>
+                                <td>{{soldier.discharge}}</td>
+                            </tr>
+                        </table>
+                    {% else %}
+                        <h4>{{msg}}</h4>
+                    {% endif %}
+                </div>
+                <div id="body">
+                    <h3>신체 정보</h3>
+                    {% if body != None %}
+                        <table id="result_table">
+                            <tr>
+                                <th>신장</th>
+                                <td>{{body.height}}</td>
+                            </tr>
+                            <tr>
+                                <th>체중</th>
+                                <td>{{body.weight}}</td>
+                            </tr>
+                            <tr>
+                                <th>시력_좌</th>
+                                <td>{{body.eye_l}}</td>
+                            </tr>
+                            <tr>
+                                <th>시력_우</th>
+                                <td>{{body.eye_r}}</td>
+                            </tr>
+                            <tr>
+                                <th>지병</th>
+                                <td>{{body.disease}}</td>
+                            </tr>
+                        </table>
+                    {% else %}
+                        <h4>{{msg}}</h4>
+                    {% endif %}
+                </div>
+                <div id="resident">
+                    <h3>개인 정보</h3>
+                    {% if info != None %}
+                        <table id="result_table">
+                            <tr>
+                                <th>봉급</th>
+                                <td>{{info.salary}}</td>
+                            </tr>
+                            <tr>
+                                <th>직종</th>
+                                <td>{{info.task}}</td>
+                            </tr>
+                            <tr>
+                                <th>졸업일</th>
+                                <td>{{info.graduation}}</td>
+                            </tr>
+                            <tr>
+                                <th>자격증</th>
+                                <td>{{info.license}}</td>
+                            </tr>
+                        </table>
+                    {% else %}
+                        <h4>{{msg}}</h4>
+                    {% endif %}
+                </div>
+                
+                
             </div>
-            <div id="body">
-                <h3>신체 정보</h3>
-                {% if body != None %}
-                    <table id="result_table">
-                        <tr>
-                            <th>신장</th>
-                            <td>{{body.height}}</td>
-                        </tr>
-                        <tr>
-                            <th>체중</th>
-                            <td>{{body.weight}}</td>
-                        </tr>
-                        <tr>
-                            <th>시력_좌</th>
-                            <td>{{body.eye_l}}</td>
-                        </tr>
-                        <tr>
-                            <th>시력_우</th>
-                            <td>{{body.eye_r}}</td>
-                        </tr>
-                        <tr>
-                            <th>지병</th>
-                            <td>{{body.disease}}</td>
-                        </tr>
-                    </table>
-                {% else %}
-                    <h4>{{msg}}</h4>
-                {% endif %}
-            </div>
-            <div id="resident">
-                <h3>개인 정보</h3>
-                {% if info != None %}
-                    <table id="result_table">
-                        <tr>
-                            <th>봉급</th>
-                            <td>{{info.salary}}</td>
-                        </tr>
-                        <tr>
-                            <th>직종</th>
-                            <td>{{info.task}}</td>
-                        </tr>
-                        <tr>
-                            <th>졸업일</th>
-                            <td>{{info.graduation}}</td>
-                        </tr>
-                        <tr>
-                            <th>자격증</th>
-                            <td>{{info.license}}</td>
-                        </tr>
-                    </table>
-                {% else %}
-                    <h4>{{msg}}</h4>
-                {% endif %}
-            </div>
-            
-            
         </div>
-    </div>
+        <div class="clear"></div>
 
-</body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function(){
-    $('#army').click(function(){
+    {% endblock content %}
+
+    {% block script %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        $(document).ready(function(){
+            $('#army').click(function(){
+                
+                location.href='/coocr_upload/army/{{idx}}'
         
-        location.href='/coocr_upload/army/{{idx}}'
-
-    })
-    $('#body').click(function(){
+            })
+            $('#body').click(function(){
+                
+                location.href='/coocr_upload/body/{{idx}}'
         
-        location.href='/coocr_upload/body/{{idx}}'
-
-    })
-    $('#resident').click(function(){
+            })
+            $('#resident').click(function(){
+                
+                location.href='/coocr_upload/resident/{{idx}}'
         
-        location.href='/coocr_upload/resident/{{idx}}'
-
-    })
-
-});
-   
-
-</script>
-</html>
+            })
+        
+        });
+        </script>
+    {% endblock script %}

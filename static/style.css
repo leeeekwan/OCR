@@ -43,9 +43,9 @@ a:visited {
     color: white;
 }
 
-/* #contents {
-    margin-top: 30px;
-} */
+#content {
+    height: auto;
+}
 
 
 /* body.html */
@@ -69,6 +69,10 @@ a:visited {
 #employees td {
     text-align: center;
     padding: 13px 5px 3px 5px;
+}
+
+.clear {
+    clear: both;
 }
 
 
@@ -119,7 +123,6 @@ a:visited {
 /* ocrbody.html */
 
 #result {
-    width:33%;
     margin-right: 30px;
 }
 
