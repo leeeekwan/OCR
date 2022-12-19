@@ -38,7 +38,7 @@
                             <input type="file" name="uploadfile" id="uploadfile" multiple="multiple"  />
                         </div>
                         <div style="margin-top:200px ;">
-                            <input type="submit" value="READ">
+                            <input type="submit" value="READ" onclick="read()">
                         </div>
                     </form>
 
@@ -103,9 +103,13 @@
             }
         
             // 수정하려는 input을 클릭하려는 경우 alert 작동, 전체 input 중 단 1번만 작동
-            $("#innerRe").one('click',function(){
-                alert("지금부터 수정이 됩니다 내용 입력에 주의해주세요!")
-            });
+            function read(){
+                if(document.getElementById("uploadfile").value == ""){
+                    alert("사진을 업로드 해주세요.")
+                }else{
+                    alert("잠시만 기다려주세요.")
+                }
+            }
 
         const banner = document.querySelector("div.banner");
         const arrows = document.querySelectorAll("div.arrow");

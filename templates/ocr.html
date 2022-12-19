@@ -33,7 +33,7 @@
                     <input type="file" name="uploadfile" id="uploadfile" multiple="multiple" />
                 </div>
                 <div style="margin-top:200px ;">
-                    <input type="submit"id="btnAtt" value="READ">
+                    <input type="submit"id="btnAtt" value="READ" onclick="read()">
                 </div>
             </form>
             <form action="/coocr_insert/resume/{{idx}}" method="post" id="insertform" enctype="multipart/form-data">
@@ -78,6 +78,8 @@
     
 </div>
 {% endblock content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     const banner = document.querySelector("div.banner");
         const arrows = document.querySelectorAll("div.arrow");
@@ -112,4 +114,14 @@
             banner.style.transform = "translate(-" + count * 44 + "vw)";
         });
     });
+
+
+    // 수정하려는 input을 클릭하려는 경우 alert 작동, 전체 input 중 단 1번만 작동
+    function read(){
+        if(document.getElementById("uploadfile").value == ""){
+            alert("사진을 업로드 해주세요.")
+        }else{
+            alert("잠시만 기다려주세요.")
+        }
+    }
 </script>

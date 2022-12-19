@@ -43,7 +43,7 @@
 
                     <div style="margin-top:200px ;">
                         <!-- 읽어들이기 버튼 기능 -->
-                        <input type="submit" value="READ">
+                        <input type="submit" value="READ" onclick="read()">
                     </div>
 
 
@@ -137,8 +137,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
             // 수정하려는 input을 클릭하려는 경우 alert 작동, 전체 input 중 단 1번만 작동
-            $(".table").one('click',function(){
-                alert("지금부터 수정이 됩니다 내용 입력에 주의해주세요!")
-            });
+            function read(){
+                if(document.getElementById("uploadfile").value == ""){
+                    alert("사진을 업로드 해주세요.")
+                }else{
+                    alert("잠시만 기다려주세요.")
+                }
+            }
         </script>
     {% endblock script %}
