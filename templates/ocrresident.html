@@ -13,7 +13,7 @@
         </h1>
 
 
-        <div style="display:flex;justify-content: space-evenly;">
+        <div style="display:flex;justify-content: space-evenly; position: relative;">
             <div style="width:36%;margin:50px;">
                 
                 {% if imgname == None %}
@@ -25,7 +25,7 @@
                         </label>
                         <input style="display: none;" type="file" name="uploadfile" id="uploadfile" multiple="multiple">
                     </div>
-                    <div style="position: absolute;right: 621px;top: 621px;">
+                    <div style="position: absolute;right: 621px;top: 356px;">
                         <input style="    height: 57px;border: none;width: 190px;" type="submit" value="READ">
                     </div>
                 </form>
@@ -46,7 +46,7 @@
                         </tr>
                         <tr>
                             <th>현주소</th>
-                            <td><textarea name="r_addr" value="{{resulttext.addr}}" style="width:300px;height:100px;font-size:15px;resize:none;">{{resulttext.addr}}</textarea></td>
+                            <td><textarea name="r_addr" value="{{resulttext.addr}}" style="width:300px;height:100px;font-size:15px;resize:none; border:none;">{{resulttext.addr}}</textarea></td>
                         </tr>
                         <tr>
                             <th>발급일자</th>

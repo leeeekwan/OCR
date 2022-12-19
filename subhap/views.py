@@ -4,6 +4,7 @@ from PIL import Image
 from django.core.files.storage import FileSystemStorage
 from .ocrtools.resume.resume import naverclova,facedetect
 from .ocrtools.body import title_read
+from .ocrtools.resident import resident
 
 from django.shortcuts import redirect
 
@@ -327,7 +328,7 @@ def ocrresident(request,i):
             #resulttext = pytesseract.image_to_string(imgfile, lang='kor')
             #지금은 파이테서렉트 쓴것이 리절트 텍스트 
             #혜지님의 모듈 결과를 resulttext에 대입해주세요
-        resulttext='' 
+        resulttext=resident(imgfile) 
         context['imgname'] = imgname
         context['resulttext'] = resulttext
 

@@ -49,17 +49,24 @@
         <div style="width:33%;">
             
             
-            <div style="margin-top:100px ;">
-                <img src="/static/face/{{idx}}.png" alt="얼굴 출력" height="150" width="100"><br>
-                <span> 학력 </span>
-                <br>
-                <textarea  name='gradu' style="width:400px;height:200px;font-size:20px;">{{resulttext1}}</textarea>
-                <br>
-                <span> 자격증 </span>
-                {% for t in resulttext2 %}
-                <textarea name="{{t.0}}" style="width:300px;height:30px;font-size:20px;">{{t.1}}
-                </textarea>
-                {% endfor %}
+            <div style="margin-top: 100px;display: flex;margin-left: -212px;">
+                <div>
+                    <img style="width: 255px;height: 314px;" src="/static/face/{{idx}}.png" alt="얼굴 출력" height="150" width="100">
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>학력</th>
+                        <td><textarea  name='gradu' style="width:400px;height:200px;font-size:20px; border:none; resize: none;">{{resulttext1}}</textarea></td>
+                    </tr>
+                    <tr>
+                        <th>자격증</th>
+                        <td> {% for t in resulttext2 %}
+                            <textarea name="{{t.0}}" style="width:300px;height:30px;font-size:20px;">{{t.1}}
+                            </textarea>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                </table>
                 <input  name="len" style="display: none " value="{{len}}">
             </div>    
             

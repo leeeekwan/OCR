@@ -147,16 +147,20 @@ a:visited {
     margin-right: 30px;
 }
 
-#innerRe {
+.table {
+    border-top: 1px solid #BDBDBD;
+    border-collapse: collapse;
     padding: 15px;
-    background-color: #C1E3F5;
     border-radius: 30px;
 }
 
-.table {
-    padding: 15px;
-    background-color: #C1E3F5;
-    border-radius: 30px;
+.table input{
+    border: none;
+}
+
+.table th, .table td{
+    border-bottom: 1px solid #BDBDBD;
+    padding: 10px;
 }
 
 #result input {
