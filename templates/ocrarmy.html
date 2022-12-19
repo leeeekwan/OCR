@@ -15,8 +15,8 @@
         <div style="display:flex">
             <div style="width:45%;margin:50px;">
                 
-                {% if imgname == '' %}
-                이미지를 READ해 주세요.
+                {% if imgname == None %}
+                <img src="/static/ours/img1.svg" style="width:90%;" />
                 {% else %}
                 <img src="/static/source/document_army/{{imgname}}" style="width:90%;" />
                 {% endif %}

@@ -16,11 +16,11 @@
         <!--  -->
         <div style="display: flex;">
             <section class="container">
-                <div class="arrow prev">&lt;</div>
                 <div class="banner">
                     {% if remain == None %}
-                        <img src="/static/ours/img1.svg" class="d-block w-100" alt="">
+                    <img style="width: 615px;" src="/static/ours/img1.svg" class="d-block w-100" alt="">
                     {%endif%}
+                    <div class="arrow prev">&lt;</div>
                     {% for i in remain %}
                     <div class="img"><img src="/static/source/{{i}}"></div>
                     {% endfor %}
