@@ -19,12 +19,28 @@
 }
 
 #ment {
+    position: absolute;
     float: left;
     margin-left: 35%;
     margin-top: 45px;
     width: 500px;
     height: 100px;
 }
+
+#statistic{ 
+    margin-top: 8%;
+    float: right;
+    margin-left: 75%;
+    width:40%;
+}
+
+/* #statistic button {
+    background-color: white;
+    text-align: center; 
+    font-size:17px; 
+    padding:20px;
+} */
+
 
 a {
     text-decoration: none;
@@ -142,9 +158,3 @@ a:visited {
     text-align: center;
 }
 
-#footer{
-    content: "l";
-    display: inline-block;
-    color: #ccc;
-    margin: 0 7px;
-}
