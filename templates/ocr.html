@@ -13,7 +13,9 @@
         <section class="container">
             <div class="banner">
                 {% if remain == None %}
-                <img style="width: 615px;" src="/static/ours/img1.svg" class="d-block w-100" alt="">
+                <label for="uploadfile">
+                    <img style="width: 615px;" src="/static/ours/img1.svg" class="d-block w-100" alt="">
+                </label>
                 {%endif%}
             <div class="arrow prev">&lt;</div>
                 {% for i in remain %}
@@ -30,7 +32,7 @@
             <form action="/coocr_upload/{{idx}}" method="post" id="Coauthform" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div style="margin-top:100px ;">
-                    <input type="file" name="uploadfile" id="uploadfile" multiple="multiple" />
+                    <input style="display: none;" type="file" name="uploadfile" id="uploadfile" multiple="multiple" />
                 </div>
                 <div style="margin-top:200px ;">
                     <input type="submit"id="btnAtt" value="READ">
