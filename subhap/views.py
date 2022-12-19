@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Employees, Body, Info, Soldier
 from PIL import Image
 from django.core.files.storage import FileSystemStorage
-from .ocrtools.resume import naverclova
+from .ocrtools.resume.resume import naverclova,facedetect
 from .ocrtools.body import title_read
 
 from django.shortcuts import redirect
@@ -33,6 +33,7 @@ def home(request):
 
 
 def result(request,i):
+    print(111)
 
     msg = "정보를 불러올 수 없습니다."
  
@@ -44,6 +45,14 @@ def result(request,i):
     }
 
     try:
+        employees = Employees.objects.get(id = i)
+        context['employees'] = employees
+
+    except Exception as e:
+
+        context['msg'] = msg
+
+    try:
         body = Body.objects.get(emp = i)
         context['body'] = body
 
@@ -53,9 +62,16 @@ def result(request,i):
 
     try:
         info = Info.objects.get(emp = i)
+        print(info)
         context['info'] = info
+        license = info.license
+        print(license)
+        qual=license.split(' ')
+        context['qual']=qual
+        print(qual)
 
     except Exception as e:
+        print(e,'poipoi')
 
         context['msg'] = msg
 
@@ -85,12 +101,12 @@ def ocr(request,i):
         uploadfile = request.FILES.getlist('uploadfile', '')
         print(uploadfile)
         if uploadfile != '':
-            for i in uploadfile:
+            for u in uploadfile:
 
-                name_old = i.name
+                name_old = u.name
                 
                 fs = FileSystemStorage(location = 'static/source')
-                imgname= fs.save(f'src-{name_old}', i)
+                imgname= fs.save(f'src-{name_old}', u)
                 print(imgname)
                 context['imgname'].append(imgname)
                 imgfile = Image.open(f'./static/source/{imgname}') 
@@ -98,7 +114,7 @@ def ocr(request,i):
                 print(path)
                 paths.append(path)
                 
-        
+        facedetect(paths[0],context['idx'])
         result=naverclova(paths[1],paths[0])
         context['resulttext1']=result[0]
         context['resulttext2']=[]
@@ -317,6 +333,24 @@ def ocrresident(request,i):
 
     return render(request,'ocrresident.html',context)
 
+def insertResident(request, i):
+
+    resi_num = request.POST.get("r_resi_num")
+    addr = request.POST.get("r_addr")
+
+    print("잘받아오나?", i, resi_num, addr)
+
+    try:
+        Employees.objects.filter(id=i).update(resi_num=resi_num, addr=addr)
+    except Exception as e:
+        print(e)
+
+    context = {
+        'idx' : i
+    }
+
+    return redirect(f'/info/{i}', context)
+
 
 from datetime import datetime
 def stats(request):
@@ -450,12 +484,14 @@ def insertResume(request,i):
 
     length = int(request.POST.get('len'))
     print(length)
-    qual=[]
+    qual=''
     gr=request.POST.get('gradu')
     for l in range(length):
         ja=request.POST.get('{}'.format(l))
         print(ja)
-        qual.append(ja)
+        qual+=ja.strip()
+        qual+=' '
+        print(qual) 
 
     try:
         Info.objects.create(emp_id=i,graduation=gr,license=qual)
@@ -468,4 +504,3 @@ def insertResume(request,i):
     }
 
     return redirect(f'/info/{i}', context)
-
