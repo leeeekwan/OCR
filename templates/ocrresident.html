@@ -13,70 +13,56 @@
         </h1>
 
 
-        <div style="display:flex">
-            <div style="width:45%;margin:50px;">
+        <div style="display:flex;justify-content: space-evenly;">
+            <div style="width:36%;margin:50px;">
                 
-                {% if imgname == '' %}
-                이미지를 READ해 주세요.
+                {% if imgname == None %}
+                <form action="/coocr_upload/resident/{{idx}}" method="post" id="Coauthform" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div>
+                        <label for="uploadfile">
+                            <img style="width: 100%;" src="/static/ours/img1.svg"/>
+                        </label>
+                        <input style="display: none;" type="file" name="uploadfile" id="uploadfile" multiple="multiple">
+                    </div>
+                    <div style="position: absolute;right: 621px;top: 621px;">
+                        <input style="    height: 57px;border: none;width: 190px;" type="submit" value="READ">
+                    </div>
+                </form>
                 {% else %}
                 <img src="/static/source/{{imgname}}" style="width:90%;" />
                 {% endif %}
-            
-                
             </div>
-
-            <div style="width:20%;">
-
-
-                <form action="/coocr_upload/resident/{{idx}}" method="post" id="Coauthform" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div style="margin-top:100px ;">
-                        <input type="file" name="uploadfile" id="uploadfile" multiple="multiple">
-                    </div>
-                    <div style="margin-top:200px ;">
-                        <input type="submit" value="READ">
-                    </div>
-                </form>
-                <form action="/coocr_insert/resident/{{idx}}" method="post" id="insertresident"  enctype="multipart/form-data">
-                    
-                    {% csrf_token %}
-
-                    <div style="margin-top:200px ;">
-                        <input type="submit" value="save">
-
-
-                    </div>
-                
-            </div>
-
-
-            <div style="width:33%;">
-                
+            <div style="width:37%;">
                 <div style="margin-top:100px ;">
                     <table class="table">
                         <tr>
-                            <td>이름</td>
+                            <th>이름</th>
                             <td><input type="text" name="r_name" id="" value="{{resulttext.name}}"></td>
                         </tr>
                         <tr>
-                            <td>주민등록번호</td>
+                            <th>주민등록번호</th>
                             <td><input type="text" name="r_resi_num" id="" value="{{resulttext.resi_num}}"></td>
                         </tr>
                         <tr>
-                            <td>현주소</td>
+                            <th>현주소</th>
                             <td><textarea name="r_addr" value="{{resulttext.addr}}" style="width:300px;height:100px;font-size:15px;resize:none;">{{resulttext.addr}}</textarea></td>
                         </tr>
                         <tr>
-                            <td>발급일자</td>
+                            <th>발급일자</th>
                             <td><input type="text" name="" id="" value="{{resulttext.issue_date}}"></td>
                         </tr>
                     </table>
                 </div>
-                
-                
-
+                <form action="/coocr_insert/resident/{{idx}}" method="post" id="insertresident"  enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div style="margin-left: 236px;">
+                        <input style="width: 190px;height: 57px;border: none;" type="submit" value="save">
+                    </div>
+                </form>
             </div>
         </div>
+
     {% endblock content %}
 
     {% block script %}
@@ -86,5 +72,14 @@
             $(".table").one('click',function(){
                 alert("지금부터 수정이 됩니다 내용 입력에 주의해주세요!")
             });
+
+            function selfcheck(){
+                var ocr_name = document.getElementsByName("r_name").value
+                console.log(ocr_name)
+                var ocr_name2 = $('input[name=r_name]').val();
+                console.log(ocr_name2)
+                
+            }
+
         </script>
     {% endblock script %}

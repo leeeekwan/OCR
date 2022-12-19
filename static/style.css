@@ -28,10 +28,15 @@
 }
 
 #statistic{ 
-    margin-top: 8%;
-    float: right;
-    margin-left: 75%;
-    width:40%;
+    text-align: end;
+    margin-top: -40px;
+    margin-right: 128px;
+}
+
+#statistic a:first-child{
+    vertical-align: 21px;
+    color: #333;
+    font-weight: 600;
 }
 
 /* #statistic button {
@@ -52,11 +57,13 @@ a:visited {
 }
 
 #footer {
-    margin-top: 40px;
+    margin-top: 100px;
     width: 100%;
+    padding: 30px;
     height: 200px;
     background-color: #0070C0;
     color: white;
+    text-align: center;
 }
 
 #content {
@@ -100,42 +107,30 @@ a:visited {
 
 } */
 
-#army {
+.view {
+    display: block;
+}
+
+.item {
+    cursor: pointer;
     margin-left: 10px;
     padding: 10px;
-    width:25%;
+    height: 53%;
+    margin-bottom: 20px;
+    width: 38%;
     border: 2px solid green;
     float: left;
 }
 
-#body {
-    margin-left: 10px;
-    padding: 10px;
-    width:30%;
-    border: 2px solid green;
-    float: left;
-}
-
-#resident {
-    margin-left: 10px;
-    padding: 10px;
-    width:30%;
-    border: 2px solid green;
-    float: left;
-}
-
-#resi {
-    margin-left: 10px;
-    padding: 10px;
-    width:30%;
-    border: 2px solid green;
-    float: left;
-}
 
 #result_table {
     width: 90%;
     margin-left:auto; 
     margin-right:auto;
+}
+
+.item:first-of-type tr:first-of-type td:nth-child(2){
+    display: none;
 }
 
 #result_table th, #result_table td {
@@ -158,16 +153,61 @@ a:visited {
     border-radius: 30px;
 }
 
+.table {
+    padding: 15px;
+    background-color: #C1E3F5;
+    border-radius: 30px;
+}
+
 #result input {
     margin: 2px 3px 15px 3px;
 }
 
 
-#footer{
-    content: "l";
-    display: inline-block;
-    color: #ccc;
-    margin: 50px 7px;
-    padding-top: 30px;
+section.container {
+    margin: 0 auto;
+    width: 50vw;
+    overflow: hidden;
+    height: fit-content;
+    position: relative;
 }
 
+div.banner {
+    width: 540vw;
+    /* transform: translate(-90vw); */
+    transition: transform 0.5s;
+}
+
+div.img {
+    width: 44vw;
+    float: left;
+}
+
+div.img img {
+    width: 100%;
+    display: block;
+}
+
+div.arrow {
+    position: absolute;
+    font-size: 2rem;
+    z-index: 1;
+    width: 35px;
+    height: 100%;
+    text-align: center;
+    cursor: pointer;
+    line-height: 40vh;
+    color: #00000070;
+    background-color: #00000021;
+}
+
+div.next {
+    right: 0;
+}
+
+div.btns {
+    position: absolute;
+    bottom: 5px;
+    width: 90vw;
+    text-align: center;
+}

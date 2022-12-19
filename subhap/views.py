@@ -42,6 +42,7 @@ def result(request,i):
     context = {
         'name':emp.name,
         'idx':i,
+        'class_field':emp.class_field,
     }
 
     try:
@@ -425,7 +426,7 @@ def stats(request):
             elif hire_year == str(year):
                 hire_cnt += 1
 
-        print(year, "년도에 대한 입사율 : ", hire_cnt / worker_cnt * 100)
+        # print(year, "년도에 대한 입사율 : ", hire_cnt / worker_cnt * 100)
         return hire_cnt / worker_cnt * 100
 
     # print("입사율 : ",hire_rate(2020), hire_rate(2019), hire_rate(2018), hire_rate(2017), hire_rate(2016))
