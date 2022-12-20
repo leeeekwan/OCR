@@ -279,11 +279,11 @@ def ocrbody(request, i):
         
                 context['resulttext'] = resulttext
         context['first']=context['imgname'][0]
-        context['remain']=context['imgname'][1:]
+        context['remain']=context['imgname'][0:]
 
 
         context['first']=context['imgname'][0]
-        context['remain']=context['imgname'][1:]
+        context['remain']=context['imgname'][0:]
     return render(request,'ocrbody.html',context)
 
 
