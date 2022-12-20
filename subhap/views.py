@@ -542,12 +542,13 @@ def ocrcont(request,i):
 
 def insertCont(request,i):
     task = request.POST.get("task")
+    sal = request.POST.get("salary")
     #addr = request.POST.get("r_addr")
 
     print("잘받아오나?", i, task)
 
     try:
-        Info.objects.filter(id=i).update(task=task)
+        Info.objects.filter(id=i).update(task=task, salary=sal)
     except Exception as e:
         print(e)
 
