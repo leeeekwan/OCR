@@ -9,7 +9,7 @@
     <div style="width: 90%;margin: 0 auto;">
         <div id="result_contents" style="display: flex;"> 
             <div style="width: 250px;margin-left: 131px;">
-                <h1 style="text-align: center;"><a href="/coocr_upload/{{idx}}" style="text-align: center;"> {{name}} {{class_field}}</a></h1>
+                <h1 style="text-align: center;"><a href="/coocr_upload/cont/{{idx}}" style="text-align: center;"> {{name}} {{class_field}}</a></h1>
                 <img style="margin-top: 69px;width: 100%;height: 50%;" src="/static/face/{{idx}}.png"  height="150" width="100">
             </div>
 
@@ -125,6 +125,11 @@
                                 <th>자격증</th>
                                 <td>{{info.license}}</td>
                             </tr>
+                            <!-- <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr> -->
                         </table>
                     {% else %}
                         <h4>{{msg}}</h4>

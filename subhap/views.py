@@ -5,6 +5,7 @@ from django.core.files.storage import FileSystemStorage
 from .ocrtools.resume.resume import naverclova,facedetect
 from .ocrtools.body import title_read
 from .ocrtools.resident import resident
+from .ocrtools.stcont import task
 
 from django.shortcuts import redirect
 
@@ -498,6 +499,47 @@ def insertResume(request,i):
     try:
         Info.objects.create(emp_id=i,graduation=gr,license=qual)
         print('info table에 insert')
+    except Exception as e:
+        print(e)
+
+    context = {
+        'idx' : i
+    }
+
+    return redirect(f'/info/{i}', context)
+
+
+def ocrcont(request,i):
+    context = {}
+    context['idx'] = i
+    if 'uploadfile' in request.FILES:
+        
+        uploadfile = request.FILES.get('uploadfile', '')
+            
+        if uploadfile != '':
+            name_old = uploadfile.name
+            
+            fs = FileSystemStorage(location = 'static/source')
+            imgname= fs.save(f'src-{name_old}', uploadfile)
+            print(imgname)
+            imgfile = Image.open(f'./static/source/{imgname}')
+            path=f'./static/source/{imgname}'
+            
+        resulttext=task(path) 
+        context['imgname'] = imgname
+        context['resulttext'] = resulttext
+
+
+    return render(request,'ocrcont.html',context)
+
+def insertCont(request,i):
+    task = request.POST.get("task")
+    #addr = request.POST.get("r_addr")
+
+    print("잘받아오나?", i, task)
+
+    try:
+        Info.objects.filter(id=i).update(task=task)
     except Exception as e:
         print(e)
 
