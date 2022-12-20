@@ -12,12 +12,12 @@
             <a href="/info">결과창</a>
         </h1>
 
-
+        <input id="savedName" value="{{savedName}}" style="display:none;">
         <div style="display:flex;justify-content: space-evenly; position: relative;">
             <div style="width:36%;margin:50px;">
                 
                 {% if imgname == None %}
-                <form action="/coocr_upload/resident/{{idx}}" method="post" id="Coauthform" enctype="multipart/form-data">
+                <form action="/coocr_upload/resident/{{idx}}" method="post" id="Coauthform"  enctype="multipart/form-data">
                     {% csrf_token %}
                     <div>
                         <label for="uploadfile">
@@ -35,10 +35,11 @@
             </div>
             <div style="width:37%;">
                 <div style="margin-top:100px ;">
+                    <form action="/coocr_insert/resident/{{idx}}" name="form" method="post" id="insertresident"  enctype="multipart/form-data">
                     <table class="table">
                         <tr>
                             <th>이름</th>
-                            <td><input type="text" name="r_name" id="" value="{{resulttext.name}}"></td>
+                            <td><input type="text" name="r_name" id="r_name" value="{{resulttext.name}}"></td>
                         </tr>
                         <tr>
                             <th>주민등록번호</th>
@@ -54,10 +55,10 @@
                         </tr>
                     </table>
                 </div>
-                <form action="/coocr_insert/resident/{{idx}}" method="post" id="insertresident"  enctype="multipart/form-data">
                     {% csrf_token %}
                     <div style="margin-left: 236px;">
-                        <input style="width: 190px;height: 57px;border: none;" type="submit" value="save">
+                        <!-- <button id="savebutton" style="width: 190px;height: 57px;border: none;" type="submit" value="save">save</button> -->
+                        <input id="savebutton" style="width: 190px;height: 57px;border: none;" type="button" value="save" onclick="save()">
                     </div>
                 </form>
             </div>
@@ -77,11 +78,17 @@
                 }
             }
 
-            function selfcheck(){
-                var ocr_name = document.getElementsByName("r_name").value
-                console.log(ocr_name)
-                var ocr_name2 = $('input[name=r_name]').val();
-                console.log(ocr_name2)
+            function save(){
+                var ocr_name = document.getElementById("r_name").value
+                var savedName = document.getElementById("savedName").value
+                if(ocr_name != savedName){
+                    alert("본인명의로 된 서류가 아닙니다.")
+                    return false
+                }else{
+                    alert('서류제출이 완료되었습니다.')
+                    document.form.submit();
+                }
+                
                 
             }
 
