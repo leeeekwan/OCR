@@ -182,6 +182,13 @@ div.banner {
     transition: transform 0.5s;
 }
 
+div.banner1 {
+    width: 135vw;
+    /* transform: translate(-90vw); */
+    transition: transform 0.5s;
+}
+
+
 div.img {
     width: 44vw;
     float: left;
