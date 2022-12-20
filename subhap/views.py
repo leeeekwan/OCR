@@ -280,11 +280,11 @@ def ocrbody(request, i):
         
                 context['resulttext'] = resulttext
         context['first']=context['imgname'][0]
-        context['remain']=context['imgname'][1:]
+        context['remain']=context['imgname'][0:]
 
 
         context['first']=context['imgname'][0]
-        context['remain']=context['imgname'][1:]
+        context['remain']=context['imgname'][0:]
     return render(request,'ocrbody.html',context)
 
 
@@ -312,8 +312,16 @@ def insertBody(request, i):
     return redirect(f'/info/{i}', context)
 
 def ocrresident(request,i):
+
+    savedName = Employees.objects.filter(id=i).values('name')[0]['name']
+    
+    print("여기일세:", savedName)
+
     context = {}
     context['idx'] = i
+    context['savedName'] = savedName
+
+    
     if 'uploadfile' in request.FILES:
         
         uploadfile = request.FILES.get('uploadfile', '')
@@ -329,7 +337,7 @@ def ocrresident(request,i):
             #resulttext = pytesseract.image_to_string(imgfile, lang='kor')
             #지금은 파이테서렉트 쓴것이 리절트 텍스트 
             #혜지님의 모듈 결과를 resulttext에 대입해주세요
-        resulttext=resident(imgfile) 
+        resulttext=resident(path) 
         context['imgname'] = imgname
         context['resulttext'] = resulttext
 
