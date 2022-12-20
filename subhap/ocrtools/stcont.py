@@ -50,15 +50,19 @@ def task(path):
     result = response.json()
     #plt_imshow_bgr(src3)
     char=''
+    mon=''
+    n=True
     for re in result['images'][0]['fields']:
         if 100<re['boundingPoly']['vertices'][0]['y']<300:
             char+=re['inferText']
-
+        if '원' in re['inferText'] and n:
+            mon=re['inferText']
+            n=False
     char=char[-11:-1]
-    
+
     
 
-    return char
+    return char,mon
 
 
 
