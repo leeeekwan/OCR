@@ -25,6 +25,7 @@ urlpatterns = [
     path('coocr_upload/army/<int:i>',views.ocrarmy),
     path('coocr_upload/body/<int:i>',views.ocrbody),
     path('coocr_upload/resident/<int:i>',views.ocrresident),
+    path('coocr_upload/cont/<int:i>', views.ocrcont),
     path('stats/',views.stats),
 
     # DB insert path
@@ -32,6 +33,8 @@ urlpatterns = [
     path('coocr_insert/army/<int:i>', views.insertArmy),
     path('coocr_insert/resume/<int:i>', views.insertResume),
     path('coocr_insert/resident/<int:i>', views.insertResident),
+    path('coocr_insert/cont/<int:i>', views.insertCont),
+    
 
 ]
 

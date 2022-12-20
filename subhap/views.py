@@ -5,6 +5,7 @@ from django.core.files.storage import FileSystemStorage
 from .ocrtools.resume.resume import naverclova,facedetect
 from .ocrtools.body import title_read
 from .ocrtools.resident import resident
+from .ocrtools.stcont import task
 
 from django.shortcuts import redirect
 
@@ -311,8 +312,16 @@ def insertBody(request, i):
     return redirect(f'/info/{i}', context)
 
 def ocrresident(request,i):
+
+    savedName = Employees.objects.filter(id=i).values('name')[0]['name']
+    
+    print("여기일세:", savedName)
+
     context = {}
     context['idx'] = i
+    context['savedName'] = savedName
+
+    
     if 'uploadfile' in request.FILES:
         
         uploadfile = request.FILES.get('uploadfile', '')
@@ -328,7 +337,7 @@ def ocrresident(request,i):
             #resulttext = pytesseract.image_to_string(imgfile, lang='kor')
             #지금은 파이테서렉트 쓴것이 리절트 텍스트 
             #혜지님의 모듈 결과를 resulttext에 대입해주세요
-        resulttext=resident(imgfile) 
+        resulttext=resident(path) 
         context['imgname'] = imgname
         context['resulttext'] = resulttext
 
@@ -498,6 +507,47 @@ def insertResume(request,i):
     try:
         Info.objects.create(emp_id=i,graduation=gr,license=qual)
         print('info table에 insert')
+    except Exception as e:
+        print(e)
+
+    context = {
+        'idx' : i
+    }
+
+    return redirect(f'/info/{i}', context)
+
+
+def ocrcont(request,i):
+    context = {}
+    context['idx'] = i
+    if 'uploadfile' in request.FILES:
+        
+        uploadfile = request.FILES.get('uploadfile', '')
+            
+        if uploadfile != '':
+            name_old = uploadfile.name
+            
+            fs = FileSystemStorage(location = 'static/source')
+            imgname= fs.save(f'src-{name_old}', uploadfile)
+            print(imgname)
+            imgfile = Image.open(f'./static/source/{imgname}')
+            path=f'./static/source/{imgname}'
+            
+        resulttext=task(path) 
+        context['imgname'] = imgname
+        context['resulttext'] = resulttext
+
+
+    return render(request,'ocrcont.html',context)
+
+def insertCont(request,i):
+    task = request.POST.get("task")
+    #addr = request.POST.get("r_addr")
+
+    print("잘받아오나?", i, task)
+
+    try:
+        Info.objects.filter(id=i).update(task=task)
     except Exception as e:
         print(e)
 
