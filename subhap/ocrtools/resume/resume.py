@@ -99,18 +99,8 @@ def naverclova(path,path1):
    
     for i in result1['images'][0]['fields']:
         if i['inferText']=='인턴·대외활동':
-            print('인턴 대외 활동')
-            pt11=int(i['boundingPoly']['vertices'][0]['x'])
             bot=int(i['boundingPoly']['vertices'][0]['y'])
-            
-            pt21=int(i['boundingPoly']['vertices'][2]['x'])
-            pt22=int(i['boundingPoly']['vertices'][2]['y'])
         if i['inferText']=='학력':
-            print('학력')
-            pt11=int(i['boundingPoly']['vertices'][0]['x'])
-            pt12=int(i['boundingPoly']['vertices'][0]['y'])
-            print(i)
-            pt21=int(i['boundingPoly']['vertices'][2]['x'])
             up=int(i['boundingPoly']['vertices'][2]['y'])
     print(up)
     print(bot)
