@@ -62,7 +62,7 @@ def facedetect(path,k):
     cy=(y2+y1)/2
     img_cropped = cv2.getRectSubPix(
             frame, 
-            patchSize=(150,100), 
+            patchSize=(100,120), 
             center=(cx,cy)
         )
     cvtImg = cv2.cvtColor(img_cropped, cv2.COLOR_BGR2RGB)
