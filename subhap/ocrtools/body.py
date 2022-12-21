@@ -8,23 +8,23 @@ from PIL import ImageFont, Image, ImageDraw
 plt.style.use('seaborn-white')
 
 
-def three_img(img1, img2, img3):
-    cvtImg1 = cv2.cvtColor(img1, cv2.COLOR_BGR2RGB)
-    cvtImg2 = cv2.cvtColor(img2, cv2.COLOR_BGR2RGB)
-    cvtImg3 = cv2.cvtColor(img3, cv2.COLOR_BGR2RGB)
+# def three_img(img1, img2, img3):
+#     cvtImg1 = cv2.cvtColor(img1, cv2.COLOR_BGR2RGB)
+#     cvtImg2 = cv2.cvtColor(img2, cv2.COLOR_BGR2RGB)
+#     cvtImg3 = cv2.cvtColor(img3, cv2.COLOR_BGR2RGB)
     
-    plt.figure(figsize=(15, 7))
-    plt.subplot(131), plt.imshow(cvtImg1)
-    plt.subplot(132), plt.imshow(cvtImg2)
-    plt.subplot(133), plt.imshow(cvtImg3)
-    plt.show()
+#     plt.figure(figsize=(15, 7))
+#     plt.subplot(131), plt.imshow(cvtImg1)
+#     plt.subplot(132), plt.imshow(cvtImg2)
+#     plt.subplot(133), plt.imshow(cvtImg3)
+#     plt.show()
 
 
 
-def plt_imshow_bgr(bgr_img):
-    cvtImg = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2RGB)
-    plt.imshow(cvtImg)
-    plt.show()
+# def plt_imshow_bgr(bgr_img):
+#     cvtImg = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2RGB)
+#     plt.imshow(cvtImg)
+#     plt.show()
 
 
 def reorderPts(pts):
@@ -41,16 +41,18 @@ def reorderPts(pts):
 
 
 def img_process(img):
+    img = np.array(img)
     rr = img.copy()
     rr = cv2.resize(rr, (0, 0), fx = 2, fy = 2)
 
 
     copy1 = img.copy()
-    copy1 = copy1[:, :, 0]
+    copy1 = copy1[:, :, 2]
     # copy1 = cv2.cvtColor(copy1, cv2.COLOR_BGR2GRAY)
     re_body1 = cv2.resize(copy1, (0, 0), fx = 2, fy = 2)
+    src_temp = re_body1.copy()
 
-    _, src_bin1 = cv2.threshold(re_body1, 
+    _, src_bin1 = cv2.threshold(src_temp, 
                                 0, 
                                 255, 
                                 cv2.THRESH_BINARY | cv2.THRESH_OTSU
@@ -58,7 +60,7 @@ def img_process(img):
 
     # 출력 영상 설정
     dw, dh = 1000, 1400
-    # srcQuad = np.array([[0, 0], [0, 0], [0, 0], [0, 0]], np.float32)
+    srcQuad = np.array([[0, 0], [0, 0], [0, 0], [0, 0]], np.float32)
     dstQuad = np.array([[0, 0], [0, dh], [dw, dh], [dw, 0]], np.float32)
     #dst = np.zeros((dh, dw), np.uint8)
 
