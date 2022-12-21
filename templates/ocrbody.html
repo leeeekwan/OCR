@@ -16,11 +16,11 @@
         <!--  -->
         <div style="display: flex;">
             <section class="container">
-                <div class="banner">
+                <div class="arrow prev">&lt;</div>
+                <div class="banner1">
                     {% if remain == None %}
                     <img style="width: 615px;" src="/static/ours/img1.svg" class="d-block w-100" alt="">
                     {%endif%}
-                    <div class="arrow prev">&lt;</div>
                     {% for i in remain %}
                     <div class="img"><img src="/static/source/{{i}}"></div>
                     {% endfor %}
@@ -111,20 +111,10 @@
                 }
             }
 
-        const banner = document.querySelector("div.banner");
+        const banner = document.querySelector("div.banner1");
         const arrows = document.querySelectorAll("div.arrow");
-        const btns = document.querySelectorAll("button.btn");
+        console.log(arrows)
         let count = 0;
-
-    // 원하는 번호의 배너로 이동
-    btns.forEach(function(btn, i, ar){
-        // 각 버튼에 배너로 이동
-        ar[i].addEventListener("click", function(){
-            // 해당 버튼 번호(i)로 count 변경
-            count = i;
-            banner.style.transform = "translate(-" + count * 44 + "vw)";
-        })
-    })
 
     // 이전버튼, 다음버튼 기능 구현
     arrows.forEach(arrow => {
@@ -133,15 +123,15 @@
             if(arrowType == 'prev'){
                 count--;
                 if(count == -1) {
-                    count = arrows.length -1;
+                    count = 2;
                 }
             }else{
                 count++;
-                if(count == arrows.length) {
+                if(count == 3) {
                     count = 0;
                 }
             }
-            banner.style.transform = "translate(-" + count * 44 + "vw)";
+            banner.style.transform = "translate(-" + count * 45 + "vw)";
         });
     });
 
