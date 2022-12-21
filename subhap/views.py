@@ -548,7 +548,7 @@ def insertCont(request,i):
     print("잘받아오나?", i, task)
 
     try:
-        Info.objects.filter(id=i).update(task=task, salary=sal)
+        Info.objects.filter(emp_id=i).update(task=task, salary=sal)
     except Exception as e:
         print(e)
 
