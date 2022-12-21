@@ -117,8 +117,8 @@ def ocr(request,i):
                 print(path)
                 paths.append(path)
                 
-        facedetect(paths[0],context['idx'])
-        result=naverclova(paths[1],paths[0])
+        #facedetect(paths[0],context['idx'])
+        result=naverclova(paths[1],paths[0],imgname)
         context['resulttext1']=result[0]
         context['resulttext2']=[]
         a=result[1:]
@@ -337,7 +337,7 @@ def ocrresident(request,i):
             #resulttext = pytesseract.image_to_string(imgfile, lang='kor')
             #지금은 파이테서렉트 쓴것이 리절트 텍스트 
             #혜지님의 모듈 결과를 resulttext에 대입해주세요
-        resulttext=resident(path) 
+        resulttext=resident(path,imgname) 
         context['imgname'] = imgname
         context['resulttext'] = resulttext
 
@@ -530,10 +530,11 @@ def ocrcont(request,i):
             fs = FileSystemStorage(location = 'static/source')
             imgname= fs.save(f'src-{name_old}', uploadfile)
             print(imgname)
+            print(type(uploadfile))
             imgfile = Image.open(f'./static/source/{imgname}')
             path=f'./static/source/{imgname}'
             
-        resulttext=task(path) 
+        resulttext=task(path,imgname) 
         context['imgname'] = imgname
         context['resulttext'] = resulttext
 
