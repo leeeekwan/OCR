@@ -40,9 +40,7 @@
                         height: 24px;display:inline-block;text-align: center;">UPLOAD</label>
                         </div>
                         <div style="margin-top:200px ;">
-                            <input type="submit" value="READ" onclick="read()" style="display: none;">
-                            <label for="READ" style="border: 2px solid black; border-radius: 5px;padding: 2px; width: 62px;
-                        height: 24px; display:inline-block;text-align: center;">READ</label>
+                            <input type="submit" value="READ" onclick="read()" id="read" style="font-size: 20px;">
                         </div>
                     </form>
 
@@ -50,11 +48,7 @@
                         {% csrf_token %}
                         <div style="margin-top:200px ;">
                             <!-- <button id="save">save</button> -->
-                            <input type="submit" value="save" style="display: none;" id="SAVE">
-                            <label for="READ" style="border: 2px solid black; border-radius: 5px;padding: 2px; width: 62px;
-                            height: 24px; display:inline-block;text-align: center;">SAVE</label>
-
-
+                            <input type="submit" value="SAVE" id="SAVE" style="font-size: 20px;">
                         </div>
                 </div>
 
