@@ -94,15 +94,9 @@ def resident(path,imgname):
             addr_y1 = tag_y1 - int(tot_y * 0.013)
             addr_y2 = tag_y2 + int(tot_y * 0.013)
             print(addr_x1, addr_x2, addr_y1, addr_y2)
-<<<<<<< Updated upstream
-            cv2.rectangle(img, pt1=(int(addr_x1), int(addr_y1)), pt2=(int(addr_x2), int(addr_y2)), color=(0,0,255), thickness=5)
-            img=Image.fromarray(img)
-            img.save(f'/static/imgr/{imgname}')            
-=======
             # cv2.rectangle(img, pt1=(int(addr_x1), int(addr_y1)), pt2=(int(addr_x2), int(addr_y2)), color=(0,0,255), thickness=5)
             # img=Image.fromarray(img)
             # img.save(f'/static/imgr/{imgname}')            
->>>>>>> Stashed changes
 
         elif tu[1] == "번호":
             # 번호 태그의 xy 좌표값 저장
