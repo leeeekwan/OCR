@@ -6,9 +6,14 @@
     {% endblock title %}
 
     {% block content %}
-        <h1>
+        <h1 style="
+        margin-left: 110px;
+    ">
             {{menutitle}}
-            <a href="/info">결과창</a>
+            <a href="/info" style="    margin-left: 65px;
+            border:3px solid black;
+            border-radius : 10px;
+            ">결과창</a>
         </h1>
 
 
@@ -16,7 +21,7 @@
             <div style="width:45%;margin:50px;">
                 
                 {% if imgname == None %}
-                <img src="/static/ours/img1.svg" style="width:90%;" />
+                <img src="/static/ours/img1.svg" style="width:90%; margin-left: 21px;" />
                 {% else %}
                 <img src="/static/source/document_army/{{imgname}}" style="width:90%;" />
                 {% endif %}
@@ -36,14 +41,19 @@
 
                     <div style="margin-top:100px ;">
 
-                        <input type="file" name="uploadfile" id="uploadfile" multiple="multiple"  />
+                        <input type="file" name="uploadfile" id="uploadfile" multiple="multiple" style="display: none;">
+                        <label for="uploadfile" style="border: 2px solid black; border-radius: 5px;padding: 2px; width: 62px;
+                        height: 24px;display:inline-block;text-align: center;">UPLOAD</label>
 
                     </div>
 
 
                     <div style="margin-top:200px ;">
                         <!-- 읽어들이기 버튼 기능 -->
-                        <input type="submit" value="READ" onclick="read()">
+                        <input type="submit" value="READ" onclick="read()" style="display: none;" id="READ">
+                        <label for="READ" style="border: 2px solid black; border-radius: 5px;padding: 2px; width: 62px;
+                        height: 24px; display:inline-block;text-align: center;">READ</label>
+
                     </div>
 
 
@@ -56,35 +66,21 @@
                     {% csrf_token %}
 
                     <div style="margin-top:200px ;">
-                    <!--<input type="hidden" value="{{a_info1}}" name="a_info1">
-                        <input type="hidden" value="{{a_info2}}" name="a_info2">
-                        <input type="hidden" value="{{a_info3}}" name="a_info3">
-                        <input type="hidden" value="{{a_info4}}" name="a_info4">
-                        <input type="hidden" value="{{a_info5}}" name="a_info5">
-                        <input type="hidden" value="{{a_info6}}" name="a_info6">
-                        <input type="hidden" value="{{a_info7}}" name="a_info7">
-                        <input type="hidden" value="{{a_info8}}" name="a_info8"> -->
+
 
                         
-                        <input type="submit" value="save">
-                        <!-- {{dbsucess}}
-                        {{dberror}} -->
+                        <input type="submit" value="save" style="display: none;" id="SAVE">
+                        <label for="READ" style="border: 2px solid black; border-radius: 5px;padding: 2px; width: 62px;
+                        height: 24px; display:inline-block;text-align: center;">SAVE</label>
+
 
                     </div>
-
-                <!-- </form> -->
 
             </div>
 
 
             <div style="width:33%;">
                 
-                <!-- <div style="margin-top:100px ;"> -->
-                    <!-- 여기서 결과는 context 를 불러오는 것으로 views.py에서 불러오는 것이다. / 원본-->
-                    <!-- <textarea value="{{resulttext}}" style="width:400px;height:600px;font-size:20px;">{{resulttext}}</textarea> -->
-
-                <!-- </div> -->
-
 
                 <div style="margin-top:100px ;">
                     <!-- <form action="/coocr_insert/army/{{idx}}" method="post" id="insertarmy" enctype="multipart/form-data"> -->
@@ -93,36 +89,36 @@
                         
                         <table class="table">
                             <tr>
-                                <td >군별</td>
-                                <td><input type="text" name="a_info1" id="" value="{{a_info1}}"></td>
+                                <td><b>군별</b></td>
+                                <td><input type="text" name="a_info1" id="" value="{{a_info1}}" style="width:200px;height:30px;font-size:20px;"></td>
                             </tr>
                             <tr>
-                                <td>계급</td>
-                                <td><input type="text" name="a_info2" id="" value="{{a_info2}}"></td>
+                                <td><b>계급</b></td>
+                                <td><input type="text" name="a_info2" id="" value="{{a_info2}}" style="width:200px;height:30px;font-size:20px;"></td>
                             </tr>
                             <tr>
-                                <td>군번</td>
-                                <td><input type="text" name="a_info3" id="" value="{{a_info3}}"></td>
+                                <td><b>군번</b></td>
+                                <td><input type="text" name="a_info3" id="" value="{{a_info3}}" style="width:200px;height:30px;font-size:20px;"></td>
                             </tr>
                             <tr>
-                                <td>역중</td>
-                                <td><input type="text" name="a_info4" id="" value="{{a_info4}}"></td>
+                                <td><b>역중</b></td>
+                                <td><input type="text" name="a_info4" id="" value="{{a_info4}}" style="width:200px;height:30px;font-size:20px;"></td>
                             </tr>
                             <tr>
-                                <td>병과</td>
-                                <td><input type="text" name="a_info5" id="" value="{{a_info5}}"></td>
+                                <td><b>병과</b></td>
+                                <td><input type="text" name="a_info5" id="" value="{{a_info5}}" style="width:200px;height:30px;font-size:20px;"></td>
                             </tr>
                             <tr>
-                                <td>입영일</td>
-                                <td><input type="text" name="a_info6" id="" value="{{a_info6}}"></td>
+                                <td><b>입영일</b></td>
+                                <td><input type="text" name="a_info6" id="" value="{{a_info6}}" style="width:200px;height:30px;font-size:20px;"></td>
                             </tr>
                             <tr>
-                                <td>전역일</td>
-                                <td><input type="text" name="a_info7" id="" value="{{a_info7}}"></td>
+                                <td><b>전역일</b></td>
+                                <td><input type="text" name="a_info7" id="" value="{{a_info7}}" style="width:200px;height:30px;font-size:20px;"></td>
                             </tr>
                             <tr>
-                                <td>전역사유</td>
-                                <td><input type="text" name="a_info8" id="" value="{{a_info8}}"></td>
+                                <td><b>전역사유</b></td>
+                                <td><input type="text" name="a_info8" id="" value="{{a_info8}}" style="width:200px;height:30px;font-size:20px;"></td>
                             </tr>
                         </table>
                     </form>

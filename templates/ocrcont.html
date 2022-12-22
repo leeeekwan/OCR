@@ -1,6 +1,23 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block content %}
+<style>
+    #save{
+        border: 3px solid black;
+        font-size: large;
+        background-color:rgb(117, 205, 240);
+
+    }
+    #btnAtt{
+        border: 3px solid black;
+        font-size: large;
+        background-color: rgb(117, 205, 240);
+
+    }
+
+
+
+</style>
 <link rel="stylesheet" href="{% static 'style.css' %}">    
     <h1>
         {{menutitle}}
@@ -34,13 +51,13 @@
                     <input style="display: none;" type="file" name="uploadfile" id="uploadfile" multiple="multiple" />
                 </div>
                 <div style="margin-top:200px ;">
-                    <input  style="font-size: 15px;" type="submit"id="btnAtt" value="READ" onclick="read()">
+                    <input  style="font-size: 30px;" type="submit"id="btnAtt" value="READ" onclick="read()">
                 </div>
             </form>
             <form action="/coocr_insert/cont/{{idx}}" method="post" id="insertform" enctype="multipart/form-data">
                 {% csrf_token %}
             <div style="margin-top:200px ;">
-                <input style="font-size: 20px;" type="submit" id="save" value="save">
+                <input style="font-size: 30px;" type="submit" id="save" value="SAVE">
                 
                 
             </div>
