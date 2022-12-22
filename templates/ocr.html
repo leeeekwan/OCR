@@ -3,13 +3,19 @@
 {% block content %}
 <style>
     #save{
-        border: 3px solid black;
+        border: 2px solid black;
         font-size: large;
+        border-radius: 5px;
+        padding: 2px;
+        background-color: aliceblue;
 
     }
     #btnAtt{
-        border: 3px solid black;
+        border: 2px solid black;
         font-size: large;
+        border-radius: 5px;
+        padding: 2px;
+        background-color: aliceblue;
 
     }
 
@@ -17,11 +23,6 @@
 
 </style>
 <link rel="stylesheet" href="{% static 'style.css' %}">    
-    <h1>
-        {{menutitle}}
-        <a href="/info">결과창</a>
-        
-    </h1>
     
     
     <div style="display:flex">
@@ -50,13 +51,18 @@
                     <input style="display: none;" type="file" name="uploadfile" id="uploadfile" multiple="multiple" />
                 </div>
                 <div style="margin-top:200px ;">
-                    <input type="submit"id="btnAtt" style="font-size:30px" value="READ" onclick="read()">
+                    <input type="submit"id="btnAtt" style="font-size:25px" value="READ" onclick="read()">
+                    <!-- <label for="READ" style="border: 2px solid black; border-radius: 5px;padding: 2px; width: 62px;
+                        height: 24px; display:inline-block;text-align: center;">READ</label> -->
+
                 </div>
             </form>
             <form action="/coocr_insert/resume/{{idx}}" method="post" id="insertform" enctype="multipart/form-data">
                 {% csrf_token %}
             <div style="margin-top:200px ;">
-                <input type="submit" style="font-size:35px" id="save" value="save">
+                <input type="submit" style="font-size:25px" id="save" value="SAVE">
+                <!-- <label for="READ" style="border: 2px solid black; border-radius: 5px;padding: 2px; width: 62px;
+                height: 24px; display:inline-block;text-align: center; font-size: large;">SAVE</label> -->
                 
                 
             </div>

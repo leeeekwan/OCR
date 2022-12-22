@@ -2,28 +2,26 @@
 {% load static %}
 {% block content %}
 <style>
-    #save{
-        border: 3px solid black;
+   #save{
+        border: 2px solid black;
         font-size: large;
-        background-color:rgb(117, 205, 240);
+        border-radius: 5px;
+        padding: 2px;
+        background-color: aliceblue;
 
     }
     #btnAtt{
-        border: 3px solid black;
+        border: 2px solid black;
         font-size: large;
-        background-color: rgb(117, 205, 240);
+        border-radius: 5px;
+        padding: 2px;
+        background-color: aliceblue;
 
     }
 
-
-
 </style>
 <link rel="stylesheet" href="{% static 'style.css' %}">    
-    <h1>
-        {{menutitle}}
-        <a href="/info">결과창</a>
-        
-    </h1>
+    
     
     
     <div style="display:flex">
@@ -51,13 +49,13 @@
                     <input style="display: none;" type="file" name="uploadfile" id="uploadfile" multiple="multiple" />
                 </div>
                 <div style="margin-top:200px ;">
-                    <input  style="font-size: 30px;" type="submit"id="btnAtt" value="READ" onclick="read()">
+                    <input  style="font-size: 25px;" type="submit"id="btnAtt" value="READ" onclick="read()">
                 </div>
             </form>
             <form action="/coocr_insert/cont/{{idx}}" method="post" id="insertform" enctype="multipart/form-data">
                 {% csrf_token %}
             <div style="margin-top:200px ;">
-                <input style="font-size: 30px;" type="submit" id="save" value="SAVE">
+                <input style="font-size: 25px;" type="submit" id="save" value="SAVE">
                 
                 
             </div>
