@@ -8,6 +8,8 @@
         border-radius: 5px;
         padding: 2px;
         background-color: aliceblue;
+        width: 70px;
+        height: 36px;
 
     }
     #btnAtt{
@@ -16,6 +18,7 @@
         border-radius: 5px;
         padding: 2px;
         background-color: aliceblue;
+        
 
     }
 
@@ -27,13 +30,14 @@
     
     <div style="display:flex">
         <section class="container">
+            
             <div class="banner">
                 {% if remain == None %}
                 <label for="uploadfile">
                     <img style="width: 615px;" src="/static/ours/img1.svg" class="d-block w-100" alt="">
                 </label>
                 {%endif%}
-            <div class="arrow prev">&lt;</div>
+                <div class="arrow prev">&lt;</div>
                 {% for i in imgname %}
                 <div class="img"><img src="/static/imgr/{{i}}"></div>
                 {% endfor %}
@@ -73,10 +77,10 @@
             
             
             <div style="margin-top: 100px;display: flex;margin-left: -212px;">
-                <div>
-                    <!-- 이 부분 12/22 수정됨 -->
+                <!-- <div>
+                   
                     <img style="width: 255px;height: 314px;" src="/static/face/{{idx}}.png" onerror="this.src='/static/face/face_proto.png'" alt="얼굴 출력" height="150" width="100">
-                </div>
+                </div> -->
                 <table class="table">
                     <tr>
                         <th>학력</th>
@@ -105,10 +109,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-    const banner = document.querySelector("div.banner");
-        const arrows = document.querySelectorAll("div.arrow");
-        const btns = document.querySelectorAll("button.btn");
-        let count = 0;
+    const banner = document.querySelector("div.banner1");
+    const arrows = document.querySelectorAll("div.arrow");
+    console.log(arrows)
+    const btns = document.querySelectorAll("button.btn");
+    let count = 0;
 
     // 원하는 번호의 배너로 이동
     btns.forEach(function(btn, i, ar){
@@ -123,19 +128,19 @@
     // 이전버튼, 다음버튼 기능 구현
     arrows.forEach(arrow => {
         arrow.addEventListener("click", function(){
-            let arrowType = arrow.classList[0];
+            let arrowType = arrow.classList[1];
             if(arrowType == 'prev'){
                 count--;
                 if(count == -1) {
-                    count = arrows.length -1;
+                    count = 2;
                 }
             }else{
                 count++;
-                if(count == arrows.length) {
+                if(count == 2) {
                     count = 0;
                 }
             }
-            banner.style.transform = "translate(-" + count * 44 + "vw)";
+            banner.style.transform = "translate(-" + count * 45 + "vw)";
         });
     });
 
