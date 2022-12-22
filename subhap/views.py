@@ -212,7 +212,7 @@ def ocrarmy(request,i):
                 bl = (int(bl[0]), int(bl[1]))
 
                 # 추출한 영역에 사각형
-                cv2.rectangle(iii, tl, br, (0, 255, 0), 2)
+                cv2.rectangle(iii, tl, br, (0, 0, 255), 2)
 
             img = Image.fromarray(iii)
 
