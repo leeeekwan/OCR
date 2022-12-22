@@ -40,14 +40,19 @@
                         height: 24px;display:inline-block;text-align: center;">UPLOAD</label>
                         </div>
                         <div style="margin-top:200px ;">
-                            <input type="submit" value="READ" onclick="read()">
+                            <input type="submit" value="READ" onclick="read()" style="display: none;">
+                            <label for="READ" style="border: 2px solid black; border-radius: 5px;padding: 2px; width: 62px;
+                        height: 24px; display:inline-block;text-align: center;">READ</label>
                         </div>
                     </form>
 
                     <form action="/coocr_insert/body/{{idx}}" method="post" name="insertForm" id="insertform" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div style="margin-top:200px ;">
-                            <button id="save">save</button>
+                            <!-- <button id="save">save</button> -->
+                            <input type="submit" value="save" style="display: none;" id="SAVE">
+                            <label for="READ" style="border: 2px solid black; border-radius: 5px;padding: 2px; width: 62px;
+                            height: 24px; display:inline-block;text-align: center;">SAVE</label>
 
 
                         </div>
