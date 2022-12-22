@@ -117,8 +117,13 @@ def ocr(request,i):
                 print(path)
                 paths.append(path)
                 
+<<<<<<< Updated upstream
         #facedetect(paths[0],context['idx'])
         result=naverclova(paths[1],paths[0],context['imgname'][0],context['imgname'][1])
+=======
+        facedetect(paths[0],context['idx'])
+        result=naverclova(paths[1],paths[0],imgname)
+>>>>>>> Stashed changes
         context['resulttext1']=result[0]
         context['resulttext2']=[]
         a=result[1:]
@@ -357,6 +362,7 @@ def ocrresident(request,i):
     context = {}
     context['idx'] = i
     context['savedName'] = savedName
+    
 
     
     if 'uploadfile' in request.FILES:
@@ -374,7 +380,18 @@ def ocrresident(request,i):
             #resulttext = pytesseract.image_to_string(imgfile, lang='kor')
             #지금은 파이테서렉트 쓴것이 리절트 텍스트 
             #혜지님의 모듈 결과를 resulttext에 대입해주세요
+
+
         resulttext=resident(path,imgname) 
+        # rrr = cv2.imread(os.path.join(path))
+        rrr = cv2.imread(os.path.join(path))
+        d1 = resulttext['d1']
+        d2 = resulttext['d2']
+        cv2.rectangle(rrr, pt1=(d1[0], d1[2]), pt2=(d1[1], d1[3]), color=(0,0,255), thickness=2)
+        cv2.rectangle(rrr, pt1=(d2[0], d2[2]), pt2=(d2[1], d2[3]), color=(0,0,255), thickness=2)
+        sss = Image.fromarray(rrr)
+        sss.save(f'./static/imgr/{imgname}')
+
         context['imgname'] = imgname
         context['resulttext'] = resulttext
 

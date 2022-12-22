@@ -94,9 +94,15 @@ def resident(path,imgname):
             addr_y1 = tag_y1 - int(tot_y * 0.013)
             addr_y2 = tag_y2 + int(tot_y * 0.013)
             print(addr_x1, addr_x2, addr_y1, addr_y2)
+<<<<<<< Updated upstream
             cv2.rectangle(img, pt1=(int(addr_x1), int(addr_y1)), pt2=(int(addr_x2), int(addr_y2)), color=(0,0,255), thickness=5)
             img=Image.fromarray(img)
             img.save(f'/static/imgr/{imgname}')            
+=======
+            # cv2.rectangle(img, pt1=(int(addr_x1), int(addr_y1)), pt2=(int(addr_x2), int(addr_y2)), color=(0,0,255), thickness=5)
+            # img=Image.fromarray(img)
+            # img.save(f'/static/imgr/{imgname}')            
+>>>>>>> Stashed changes
 
         elif tu[1] == "번호":
             # 번호 태그의 xy 좌표값 저장
@@ -146,14 +152,11 @@ def resident(path,imgname):
         # 본인의 이름 + 주민등록번호 출력
         if myname_x1 < read_x < myname_x2 and myname_y1 < read_y < myname_y2:
             pre = tu[1].strip()
-            print(pre)
             if re.match('\D', pre[0]): # 이름 일 때
                 name = pre
-                print("000000000000")
-                
-            
             elif re.match('[0-9]', pre[0]): # 주민번호 일 때
                 resi_num = pre
+
 
     print("이름 : ", name)
     print("주민번호 : ", resi_num)
@@ -161,11 +164,18 @@ def resident(path,imgname):
     addr = addr_pre2.strip()
     print("현주소 : ", addr)
 
+    # cv2.rectangle(img, pt1=(int(addr_x1), int(addr_y1)), pt2=(int(addr_x2), int(addr_y2)), color=(0,0,255), thickness=5)
+    # img=Image.fromarray(img)
+    # img.save(f'/static/imgr/{imgname}')   
+
 
     resi_dic = {}
     resi_dic['name'] = name
     resi_dic['resi_num'] = resi_num
     resi_dic['addr'] = addr
+    resi_dic['d1'] = (addr_x1, addr_x2, addr_y1, addr_y2)
+    resi_dic['d2'] = (myname_x1, myname_x2, myname_y1, myname_y2)
+
 
 
 

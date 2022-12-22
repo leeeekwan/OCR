@@ -191,10 +191,12 @@ a:visited {
     border-collapse: collapse;
     padding: 15px;
     border-radius: 30px;
+    font-size: 20px;
 }
 
 .table input{
     border: none;
+    font-size: 20px;
 }
 
 .table th, .table td{
