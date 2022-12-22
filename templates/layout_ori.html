@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    {% block script %}{% endblock script %}
+
+    {% block title %}
+    <title>Document</title>
+    {% endblock title%}
+</head>
+<body>
+    {% block header %}
+        <div id="header">
+            <div id="logo">
+                <a href="/">
+                    <img src="/static/ours/logo.svg">
+                </a>
+            </div>
+            <div id="ment">
+                <h1>겨울에도 지지않는 꽃 Flower입니다</h1>
+            </div>
+            <div class="clear"></div>
+        </div>
+    {% endblock header %}
+
+    <div id="content">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    {% block footer %}
+        <div id="footer">
+            <ul>
+
+            </ul>
+             <dl class="footer_help">
+
+                고객센터 : 1588-5890 (평일  09:00 ~ 19:00 토요일 09:00 ~ 15:00) | Email : haemosulgh@naver.com  <br>
+                서울 강남구 테헤란로 146 3~4층 코리아 아카데미 | 대표 : 이관호, 정은수, 김혜지, 신종성, 위효정 |  <br>               
+             </dl>
+        </div>
+    {% endblock footer %}
+</body>
+</html>

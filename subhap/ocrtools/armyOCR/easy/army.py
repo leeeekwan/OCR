@@ -53,8 +53,8 @@ def call_army(path):
                     recog_network='custom')
 
     # 폴더 안의 이미지를 상단부터 하단 순으로 순차적으로 불러옴
-    files, count = get_files(path)   # 이미지를 불러오는 경로
-    # file = cv2.imread(os.path.join(path, imgname))
+    # files, count = get_files(path)   # 이미지를 불러오는 경로
+    file = cv2.imread(path)
 
   
 
@@ -63,19 +63,19 @@ def call_army(path):
 
     # 불러온 이미지들을 반복문을 이용하여 순서대로 불러옴
     # 이미지를 폴더를 지정, 폴더 내부의 것을 순차적으로 불러옴 ---------------------------------------------
-    for idx, file in enumerate(files):
-        filename = os.path.basename(file)
+    # for idx, file in enumerate(files):
+        # filename = os.path.basename(file)
 
 
 
-        result = reader.readtext(file, # paragraph=True, 
-                                decoder='wordbeamsearch',   # wordbeamsearch
-                                contrast_ths=0.4,           # contrast_ths : 정확도 0.5 인 텍스트 모델에 다시 돌리는 것
-                                adjust_contrast=0.6,
-                                canvas_size  = 1260,        # 1260 (예비역, 만기)
-                                mag_ratio = 7,              # 확대 정도
-                                beamWidth  = 10
-                                )
+    result = reader.readtext(file, # paragraph=True, 
+                            decoder='wordbeamsearch',   # wordbeamsearch
+                            contrast_ths=0.4,           # contrast_ths : 정확도 0.5 인 텍스트 모델에 다시 돌리는 것
+                            adjust_contrast=0.6,
+                            canvas_size  = 1260,        # 1260 (예비역, 만기)
+                            mag_ratio = 7,              # 확대 정도
+                            beamWidth  = 10
+                            )
         
 
 
@@ -85,45 +85,59 @@ def call_army(path):
         # result[1]: string
         # result[2]: confidence
 
-        count = 0
-        a_info = {'군별': None,'계급': None,'군번': None,'역중':None,'병과':None,'입영일':None,'전역일': None,'전역':None}
+    count = 0
+    a_info = {'군별': None,'계급': None,'군번': None,'역중':None,'병과':None,'입영일':None,'전역일': None,'전역':None}
 
-        for (bbox, string, confidence) in result:
-        # for (bbox, string) in result:
+    a_where = {}
 
-            if string == '군별':
-                count += 1
+    for (bbox, string, confidence) in result:
+    # for (bbox, string) in result:
 
-            if count >= 1:
-                if count % 2 ==0:
-                    print(string)
-                    if count//2 == 1:
-                        a_info['군별']=string
-                    if count//2 == 2:
-                        a_info['계급']=string
-                    if count//2 == 3:
-                        a_info['군번']=string
-                    if count//2 == 4:
-                        a_info['역중']=string
-                    if count//2 == 5:
-                        a_info['병과']=string
-                    if count//2 == 6:
-                        a_info['입영일']=string
-                    if count//2 == 7:
-                        a_info['전역일']=string
-                    if count//2 == 8:
-                        a_info['전역']=string
+        if string == '군별':
+            count += 1
 
-                if string == '만기':
-                    break
-                count += 1
-            
-        # print(a_info)
+        if count >= 1:
+            if count % 2 ==0:
+                print(string)
+                if count//2 == 1:
+                    a_info['군별']=string
+                    a_where['a'] = bbox
+                    print(bbox)   # 이게 2중 박스 [[364, 385], [389, 385], [389, 404], [364, 404]]
+                if count//2 == 2:
+                    a_info['계급']=string
+                    a_where['b'] = bbox
+                if count//2 == 3:
+                    a_info['군번']=string
+                    a_where['c'] = bbox
+                if count//2 == 4:
+                    a_info['역중']=string
+                    a_where['d'] = bbox
+                if count//2 == 5:
+                    a_info['병과']=string
+                    a_where['e'] = bbox
+                if count//2 == 6:
+                    a_info['입영일']=string
+                    a_where['f'] = bbox
+                if count//2 == 7:
+                    a_info['전역일']=string
+                    a_where['g'] = bbox
+                if count//2 == 8:
+                    a_info['전역']=string
+                    a_where['h'] = bbox
 
-        # a_text = "군별 : "+a_info['군별']+"\n"+"계급 : "+a_info['계급']+"\n"+"군번 : "+a_info['군번']+"\n"+"역중 : "+a_info['역중']+"\n"+"병과 : "+a_info['병과']+"\n"+"입영일 : "+a_info['입영일']+"\n"+"전역일 : "+a_info['전역일']+"\n"+"전역사유 : "+a_info['전역']
+            if string == '만기':
+                break
+            count += 1
 
-        # return a_text
-        return a_info
+    a_in = [a_info, a_where]
+        
+    # print(a_info)
+
+    # a_text = "군별 : "+a_info['군별']+"\n"+"계급 : "+a_info['계급']+"\n"+"군번 : "+a_info['군번']+"\n"+"역중 : "+a_info['역중']+"\n"+"병과 : "+a_info['병과']+"\n"+"입영일 : "+a_info['입영일']+"\n"+"전역일 : "+a_info['전역일']+"\n"+"전역사유 : "+a_info['전역']
+
+    # return a_text
+    # return a_info
+    return a_in
 
 
 # 이미지를 1개만 불러오는 경우 ----------------------------------------------

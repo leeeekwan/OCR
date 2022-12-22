@@ -68,7 +68,8 @@
             
             <div style="margin-top: 100px;display: flex;margin-left: -212px;">
                 <div>
-                    <img style="width: 255px;height: 314px;" src="/static/face/{{idx}}.png" alt="얼굴 출력" height="150" width="100">
+                    <!-- 이 부분 12/22 수정됨 -->
+                    <img style="width: 255px;height: 314px;" src="/static/face/{{idx}}.png" onerror="this.src='/static/face/face_proto.png'" alt="얼굴 출력" height="150" width="100">
                 </div>
                 <table class="table">
                     <tr>
