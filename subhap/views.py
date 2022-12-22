@@ -157,22 +157,24 @@ def ocrarmy(request,i):
         # print('asdfljasdflkj')
             
         if uploadfile != '':
-            name_old = uploadfile.name
-            # print('제발')
-
-
-            # 이미지를 불러오는 경로도 좀 손을 봐야 한다
             
+            name_old = uploadfile.name
+
+
+
+            # 한번에 하려면 여기서 저장하기 전에 네모를 표시해야 한다.
+
 
             #fs = FileSystemStorage(location = 'static\source\document_army')    # 이미지들이 저장되는 곳
             fs = FileSystemStorage(location = 'static/source/document_army')    # 이미지들이 저장되는 곳
             imgname= fs.save(f'src-{name_old}', uploadfile)       # 이미지를 저정하는 동작 (이미지명, 이미지파일)
-            # print(imgname)                                        # 이미지명 확인
+            print(imgname)                                        # 이미지명 확인
 
 
             #path=f'static\source\document_army'                   # 이미지를 불러올 경로
-            path=f'static/source/document_army'                   # 이미지를 불러올 경로
-            print(path)
+            # path=f'static/source/document_army'                   # 이미지를 불러올 경로
+            path1=f'static/source/document_army/{imgname}'                   # 이미지를 불러올 경로
+            # print(path)
 
 
             # ------------------------------------------------- 
@@ -181,9 +183,44 @@ def ocrarmy(request,i):
 
             # resulttext = call_army(path)    
             # resulttext = call_army(path, imgname)
-            a_info = call_army(path)
+            # a_info = call_army(path)
+            a_in = call_army(path1)
+            a_info = a_in[0]
             print(a_info)
             a_text = "군별 : "+a_info['군별']+"\n"+"계급 : "+a_info['계급']+"\n"+"군번 : "+a_info['군번']+"\n"+"역중 : "+a_info['역중']+"\n"+"병과 : "+a_info['병과']+"\n"+"입영일 : "+a_info['입영일']+"\n"+"전역일 : "+a_info['전역일']+"\n"+"전역사유 : "+a_info['전역']
+
+
+        # --------------------------------------------------------------------
+
+
+            
+            # for a_where in a_in[1]:    # bbox 튜플
+            # # for (bbox, text) in results:
+            
+
+                
+
+            iii = cv2.imread(os.path.join(path1))
+
+            
+            
+            for num in ['a','b','c','d','e','f','g','h']:
+                (tl, tr, br, bl) = a_in[1][num]
+                tl = (int(tl[0]), int(tl[1]))
+                tr = (int(tr[0]), int(tr[1]))
+                br = (int(br[0]), int(br[1]))
+                bl = (int(bl[0]), int(bl[1]))
+
+                # 추출한 영역에 사각형
+                cv2.rectangle(iii, tl, br, (0, 255, 0), 2)
+
+            img = Image.fromarray(iii)
+
+            img.save(path1)
+        
+
+
+
 
 
             # ---------------------------------------------------

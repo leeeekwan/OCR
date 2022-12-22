@@ -4,20 +4,11 @@
     {% block title %}
         <title>HAP(인사등록프로그램)</title>
     {% endblock title %}
-    {% block statistics %}
-    <!-- 이부분 12/22 수정됨 -->
-        <div id="statistic" style="
-        margin-top: 0px;
-    ">
-            <a href='/stats'>통계보기</a>
-            <a href='/stats'><img src="/static/ours/icon1.png" alt="보여지지말기 통계아이콘" style="display: inline-block;
-                margin-right: 0px;
-                margin-left: 300px;
-                margin-bottom: 0px;
-                margin-top: 0px;"></a>
-        </div>
-    {%  endblock statistics %}
     {% block content %}
+    <div id="statistic">
+        <a href='/stats'>통계보기</a>
+        <a href='/stats'><img src="/static/ours/icon1.png" alt="보여지지말기 통계아이콘"></a>
+    </div>
         <div id="contents">   <!-- 내용 -->
             {% if employees != None %}   <!--DB에서 가져온 직원 정보-->
                 <table id="employees">

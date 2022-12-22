@@ -15,17 +15,58 @@
 </head>
 <body>
     {% block header %}
-        <div id="header">
+    <!-- 이부분 12/22 수정됨 -->
+    <div id="header" style="
+        width: 1067.4;
+        margin-right: 0px;
+        display: inline-block;
+        width: 100px;
+        float: initial;
+    ">
             <div id="logo">
                 <a href="/">
                     <img src="/static/ours/logo.svg">
                 </a>
             </div>
-            <div id="ment">
+            <div id="ment" style="position: absolute;
+                float: left;
+                margin-left: 35%;
+                margin-top: 45px;
+                width: 550px;
+                height: 100px;">
                 <h1>겨울에도 지지않는 꽃 Flower입니다</h1>
             </div>
-            <div class="clear"></div>
-        </div>
+            <div class="clear" style="height: 100px;">
+                <div id="statistic" style="
+                    margin-top: -70;
+                    margin-top: -100;
+                    width: 60.4;
+                    display: inline-block;
+                    margin-right: -60;
+                    margin-right: 0px;
+                    margin-top: 0;
+                    margin-top: 0;
+                    margin-left: 950px;
+                    /* float: left; */
+                    margin-bottom: 0px;
+                    margin-top: 50px;
+                ">
+                {% block statistics %}
+
+                    <!-- 이 부분 12/22 새로 생성된 레이아웃 -->
+
+
+                    <!-- <a href="/stats">통계보기</a>
+                    <a href="/stats"><img src="/static/ours/icon1.png" alt="보여지지말기 통계아이콘" style="
+                        margin-bottom: 0px;
+                        padding-bottom: 0px;
+                        padding-top: 0px;
+                        margin-left: 0px;
+                    "></a> -->
+                {% endblock statistics %}
+                </div>
+            </div>
+    </div>
     {% endblock header %}
 
     <div id="content">

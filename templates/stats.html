@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% load static %}
-{%block content%}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +17,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>  <!--차트링크-->
 </head>
 <body>
+  {%block content%}
+  <!-- 이거 여기로 옮겨야 어멘 의 글자가 조정된다. -->
     <!-- 성비 -->
     <input type="text" name="" id="women" value="{{per_women}}" style="display: none;">
     <input type="text" name="" id="men" value="{{per_men}}" style="display: none;">
