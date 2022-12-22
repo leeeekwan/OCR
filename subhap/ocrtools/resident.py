@@ -7,6 +7,7 @@ import easyocr
 plt.style.use('seaborn-white')
 # from PIL import ImageFont, ImageDraw, Image
 import re
+from PIL import Image
 
 def reorderPts(pts):
     idx = np.lexsort((pts[:, 1], pts[:, 0]))  # 칼럼0 -> 칼럼1 순으로 정렬한 인덱스를 반환
@@ -22,9 +23,9 @@ def reorderPts(pts):
 
 
 
-def resident(path):
+def resident(path,imgname):
     img=cv2.imread(os.path.join(path))
-    plt.imshow(img)
+    #plt.imshow(img)
 
     img_re = cv2.resize(img, (0,0), fx=2, fy=2)
 
@@ -93,7 +94,9 @@ def resident(path):
             addr_y1 = tag_y1 - int(tot_y * 0.013)
             addr_y2 = tag_y2 + int(tot_y * 0.013)
             print(addr_x1, addr_x2, addr_y1, addr_y2)
-    #         cv2.rectangle(pre_temp, pt1=(int(addr_x1), int(addr_y1)), pt2=(int(addr_x2), int(addr_y2)), color=(0,0,255), thickness=10)
+            cv2.rectangle(img, pt1=(int(addr_x1), int(addr_y1)), pt2=(int(addr_x2), int(addr_y2)), color=(0,0,255), thickness=5)
+            img=Image.fromarray(img)
+            img.save(f'/static/imgr/{imgname}.jpg')            
 
         elif tu[1] == "번호":
             # 번호 태그의 xy 좌표값 저장

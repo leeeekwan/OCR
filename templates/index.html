@@ -24,7 +24,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Image</th>
+                            <!-- <th>Image</th> -->
                             <th>성명</th>
                             <th>부서</th>
                             <th>직위(직책)</th>
@@ -37,7 +37,7 @@
                     {% for i in employees %}
                         <tr>
                             <td>{{ i.id }}</td>
-                            <td>{{ i.image }}</td>
+                            <!-- <td>{{ i.image }}</td> -->
                             <td><a href="/info/{{i.id}}">{{ i.name }}</a></td>
                             <td>{{ i.depart }}</td>
                             <td>{{ i.class_field }}</td>

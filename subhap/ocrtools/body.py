@@ -99,7 +99,22 @@ def img_process(img):
         
     return dst
 
+# 박스봐표 가공 함수
+def make_pt(what_x, what_y, first, last):
+    pt1 = (
+        what_x[0] + first[0],
+        what_y[0] + first[1]
+          )
+    pt2 = (
+        what_x[0] + last[0],
+        what_y[0] + last[1]
+        )
+    
+    pt = (pt1, pt2)
+    
+    return pt
 
+# 데이터 저장소
 xy_data = {
     'titleX' : (100, 1900),
     'titleY' : (250, 430),
@@ -111,9 +126,12 @@ xy_data = {
     'thirdY' : (1480, 1850)
           }
 
+img_data = {}
 
 resulttext = {'date' : ''}   # date, disease, height, weight, eye_L, eye_R
 
+
+# OCR
 def title_read(img):
 
     img = np.array(img)
@@ -131,9 +149,12 @@ def title_read(img):
         if "심뇌" in ti[1]:   # 날짜
             print(f'{ti[1]} body1')
 
-            print('날짜 shape = ')
-            print(dst.shape)
+            # 좌표
+            pt = make_pt(xy_data['titleX'], xy_data['titleY'], ti[0][0], ti[0][2])
             
+            # 제목부분 박스
+            dst = cv2.rectangle(dst, pt[0], pt[1], (0, 0, 255), thickness = 3)
+               
             result = reader.readtext(dst[
                 xy_data['firstY'][0]:xy_data['firstY'][1],
                 xy_data['firstX'][0]:xy_data['firstX'][1]
@@ -141,6 +162,14 @@ def title_read(img):
             
             for dt in result:
                 resulttext['date'] += dt[1]
+
+                # 좌표
+                pt = make_pt(xy_data['firstX'], xy_data['firstY'], dt[0][0], dt[0][2])
+            
+                # 날짜부분 박스
+                dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                
+                img_data['img1'] = dst
 
             print(resulttext['date'])
                         
@@ -150,8 +179,12 @@ def title_read(img):
         elif "건강검진" in ti[1]:   # 유질환
             print(f'{ti[1]} body3')
 
-            print('유질환 shape = ')
-            print(dst.shape)
+            # 좌표
+            pt = make_pt(xy_data['titleX'], xy_data['titleY'], ti[0][0], ti[0][2])
+
+            # 제목부분 박스
+            dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+            
             
             result = reader.readtext(dst[
                 xy_data['thirdY'][0]:xy_data['thirdY'][1],
@@ -162,8 +195,25 @@ def title_read(img):
             for i in range(len(result)):
                 if result[i][1] == "유질환" or result[i][1] == "유절판" or result[i][1] == '유절환':
                     resulttext['disease'] = result[i + 1][1]
+
+                    # 좌표
+                    pt = make_pt(xy_data['thirdX'], xy_data['thirdY'], result[i][0][0], result[i][0][2])
+
+                    # 유질환 제목부분 박스
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
                     
-                    print(resulttext['disease'])
+                    #-----------------------------------------------------------
+
+                    # 좌표
+                    pt = make_pt(xy_data['thirdX'], xy_data['thirdY'], result[i + 1][0][0], result[i + 1][0][2])
+
+                    # 유질환부분 박스
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                    
+                    
+            print(resulttext['disease'])
+
+            img_data['img2'] = dst
             
             break
         
@@ -185,19 +235,63 @@ def title_read(img):
                 if "및 몸무게" in result[i][1] or "무게" in result[i][1]:
                     resulttext['height'] = result[i + 1][1]
                     resulttext['weight'] = result[i + 2][1]
+
+                    # 좌표
+                    pt = make_pt(xy_data['secondX'], xy_data['secondY'], result[i][0][0], result[i][0][2])
+
+                    # 키, 몸무게 제목부분 박스
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                    
+                    
+                    # 좌표
+                    pt = make_pt(xy_data['secondX'], xy_data['secondY'], result[i + 1][0][0], result[i + 1][0][2])
+
+                    # 키 부분 박스
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                    
+                    
+                    # 좌표
+                    pt = make_pt(xy_data['secondX'], xy_data['secondY'], result[i + 2][0][0], result[i + 2][0][2])
+
+                    # 몸무게 제목부분 박스
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+
                 
                     print(resulttext['height'], resulttext['weight'])
                 
                 if '시력' in result[i][1] or '시디' in result[i][1]:
                     resulttext['eye_l'] = result[i + 1][1]
                     resulttext['eye_r'] = result[i + 3][1]
+
+                    # 좌표
+                    pt = make_pt(xy_data['secondX'], xy_data['secondY'], result[i][0][0], result[i][0][2])
+
+                    # 시력 제목부분 박스
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                    
+                    
+                    # 좌표
+                    pt = make_pt(xy_data['secondX'], xy_data['secondY'], result[i + 1][0][0], result[i + 1][0][2])
+
+                    # 왼쪽 부분 박스
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                    
+                    
+                    # 좌표
+                    pt = make_pt(xy_data['secondX'], xy_data['secondY'], result[i + 3][0][0], result[i + 2][0][2])
+
+                    # 오른쪽 부분 박스
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                    
                 
-                    print(resulttext['eye_l'], resulttext['eye_r'])
+            print(resulttext['eye_l'], resulttext['eye_r'])
+
+            img_data['img3'] = img
 
             break
         
 
-    return resulttext
+    return resulttext, img_data
 
 
 
