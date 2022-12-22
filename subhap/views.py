@@ -117,13 +117,13 @@ def ocr(request,i):
                 print(path)
                 paths.append(path)
                 
-<<<<<<< Updated upstream
-        #facedetect(paths[0],context['idx'])
+
+        
         result=naverclova(paths[1],paths[0],context['imgname'][0],context['imgname'][1])
-=======
+
         facedetect(paths[0],context['idx'])
-        result=naverclova(paths[1],paths[0],imgname)
->>>>>>> Stashed changes
+ 
+
         context['resulttext1']=result[0]
         context['resulttext2']=[]
         a=result[1:]
