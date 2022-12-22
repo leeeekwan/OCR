@@ -35,12 +35,12 @@ def plt_imshow_bgr(bgr_img):
 #flowers/subhap/ocrtools/deploy.prototxt.txt
 
 def facedetect(path,k):
-    print(k,'oipoipoi')
-    frame=cv2.imread(path)
+    
+    frame=cv2.imread(path) #민수 사진 frame
     model = os.path.join('C:/DevRoot/flowers/subhap/ocrtools/resume/res10_300x300_ssd_iter_140000_fp16.caffemodel')
     config = os.path.join('C:/DevRoot/flowers/subhap/ocrtools/resume/dproto.txt')
     print(model,config)
-    print('봐봐 시발 이게 안되잔아')
+   
     net = cv2.dnn.readNet(model, config)
     blob=cv2.dnn.blobFromImage(frame,1,(300,300),(104,177,123))
     net.setInput(blob)
@@ -60,13 +60,13 @@ def facedetect(path,k):
         y2 = int(detect[i, 6] * h)
     cx=(x2+x1)/2
     cy=(y2+y1)/2
-    cv2.rectangle(
-        frame,
-        pt1=(x1,y1),
-        pt2=(x2,y2),
-        color=(0,0,255),
-        thickness=4
-    )
+    # cv2.rectangle(
+    #     frame,
+    #     pt1=(x1,y1),
+    #     pt2=(x2,y2),
+    #     color=(0,0,255),
+    #     thickness=4
+    # )
     img_cropped = cv2.getRectSubPix(
             frame, 
             patchSize=(100,120), 
@@ -76,9 +76,10 @@ def facedetect(path,k):
     a=Image.fromarray(cvtImg)
     a.save(f'./static/face/{k}.png')
 
-def naverclova(path,path1,imgname):
+def naverclova(path,path1,imgname1,imgname2):
     resulttext=[]
     src3=cv2.imread(os.path.join(path1))
+    src4=cv2.imread(os.path.join(path))
     files=[('file',open(path,'rb'))]
     files1=[('file',open(path1,'rb'))]
     api_url = 'https://byoawp590b.apigw.ntruss.com/custom/v1/19592/c2e2067f630cd03dc609abedf56e14f81826e57380d0f5c33daec73fb634b1a7/general'
@@ -111,17 +112,25 @@ def naverclova(path,path1,imgname):
             pt11=int(i['boundingPoly']['vertices'][0]['x'])
             pt21=int(i['boundingPoly']['vertices'][2]['x'])
             pt22=int(i['boundingPoly']['vertices'][2]['y'])
-            cv2.rectangle(src3, pt1=(pt11,bot), pt2=(pt21,pt22),color=(255,0,0), thickness=2)
-            img=Image.fromarray(src3)
-            img.save(f'./static/imgr/{imgname}.png')
+            #cv2.rectangle(src3, pt1=(pt11,bot), pt2=(pt21,pt22),color=(255,0,0), thickness=2)
+            # img=Image.fromarray(src3)
+            # img.save(f'./static/imgr/{imgname}.png')
         if i['inferText']=='학력':
             up=int(i['boundingPoly']['vertices'][2]['y'])
+
+    cv2.rectangle(src3,pt1=(pt11,up),pt2=(pt11+450,bot),color=(0,0,),thickness=5)
+    cv2.rectangle(src3,pt1=(65,8),pt2=(165,123),color=(0,0,255),thickness=5)
+    src3=cv2.cvtColor(src3, cv2.COLOR_BGR2RGB)
+    img=Image.fromarray(src3)
+    img.save(f'./static/imgr/{imgname1}')
     print(up)
     print(bot)
     ch=''
     for i in result1['images'][0]['fields']:
         if up<int(i['boundingPoly']['vertices'][0]['y'])<bot:
             ch+=i['inferText']
+
+
 
    
         if '대학교' in  i['inferText']:
@@ -163,6 +172,10 @@ def naverclova(path,path1,imgname):
                 ja+='/'
 
             ja+=i['inferText']
+    cv2.rectangle(src4,pt1=(150,int(bot)),pt2=(600,int(up)),color=(0,0,255),thickness=5)
+    src4=cv2.cvtColor(src4, cv2.COLOR_BGR2RGB)
+    img=Image.fromarray(src4)
+    img.save(f'./static/imgr/{imgname2}')
     a=ja.split('/')
     for s in a:
         if s!='':

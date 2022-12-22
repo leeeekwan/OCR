@@ -1,6 +1,21 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block content %}
+<style>
+    #save{
+        border: 3px solid black;
+        font-size: large;
+
+    }
+    #btnAtt{
+        border: 3px solid black;
+        font-size: large;
+
+    }
+
+
+
+</style>
 <link rel="stylesheet" href="{% static 'style.css' %}">    
     <h1>
         {{menutitle}}
@@ -18,8 +33,8 @@
                 </label>
                 {%endif%}
             <div class="arrow prev">&lt;</div>
-                {% for i in remain %}
-                <div class="img"><img src="/static/source/{{i}}"></div>
+                {% for i in imgname %}
+                <div class="img"><img src="/static/imgr/{{i}}"></div>
                 {% endfor %}
             </div>
             <div class="arrow next">&gt;</div>
@@ -35,13 +50,13 @@
                     <input style="display: none;" type="file" name="uploadfile" id="uploadfile" multiple="multiple" />
                 </div>
                 <div style="margin-top:200px ;">
-                    <input type="submit"id="btnAtt" value="READ" onclick="read()">
+                    <input type="submit"id="btnAtt" style="font-size:30px" value="READ" onclick="read()">
                 </div>
             </form>
             <form action="/coocr_insert/resume/{{idx}}" method="post" id="insertform" enctype="multipart/form-data">
                 {% csrf_token %}
             <div style="margin-top:200px ;">
-                <button id="save">save</button>
+                <input type="submit" style="font-size:35px" id="save" value="save">
                 
                 
             </div>
@@ -58,12 +73,12 @@
                 <table class="table">
                     <tr>
                         <th>학력</th>
-                        <td><textarea  name='gradu' style="width:400px;height:200px;font-size:20px; border:none; resize: none;">{{resulttext1}}</textarea></td>
+                        <td><textarea  name='gradu' style="width:400px;height:200px;font-size:30px; border:none; resize: none;">{{resulttext1}}</textarea></td>
                     </tr>
                     <tr>
                         <th>자격증</th>
                         <td> {% for t in resulttext2 %}
-                            <textarea name="{{t.0}}" style="width:300px;height:30px;font-size:20px;">{{t.1}}
+                            <textarea name="{{t.0}}" style="width:300px;height:30px;font-size:30px;">{{t.1}}
                             </textarea>
                             {% endfor %}
                         </td>

@@ -96,7 +96,7 @@ def resident(path,imgname):
             print(addr_x1, addr_x2, addr_y1, addr_y2)
             cv2.rectangle(img, pt1=(int(addr_x1), int(addr_y1)), pt2=(int(addr_x2), int(addr_y2)), color=(0,0,255), thickness=5)
             img=Image.fromarray(img)
-            img.save(f'/static/imgr/{imgname}.jpg')            
+            img.save(f'/static/imgr/{imgname}')            
 
         elif tu[1] == "번호":
             # 번호 태그의 xy 좌표값 저장

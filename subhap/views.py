@@ -118,7 +118,7 @@ def ocr(request,i):
                 paths.append(path)
                 
         #facedetect(paths[0],context['idx'])
-        result=naverclova(paths[1],paths[0],imgname)
+        result=naverclova(paths[1],paths[0],context['imgname'][0],context['imgname'][1])
         context['resulttext1']=result[0]
         context['resulttext2']=[]
         a=result[1:]
@@ -129,7 +129,7 @@ def ocr(request,i):
 
         print(context['resulttext2'])
         context['first']=context['imgname'][0]
-        context['remain']=context['imgname'][1:]
+        context['remain']=context['imgname']
         context['len']=len(a)
         print(context['len'])
 
