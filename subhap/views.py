@@ -273,7 +273,7 @@ def ocrbody(request, i):
                 imgfile = Image.open(f'./static/source/{imgname}')
                 path=f'./static/source/{imgname}'
 
-                resulttext = title_read(imgfile)
+                resulttext = title_read(imgfile,imgname)
             #지금은 파이테서렉트 쓴것이 리절트 텍스트 
             #은수님의 모듈 결과를 resulttext에 대입해주세요
         
