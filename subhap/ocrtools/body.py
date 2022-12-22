@@ -132,7 +132,7 @@ resulttext = {'date' : ''}   # date, disease, height, weight, eye_L, eye_R
 
 
 # OCR
-def title_read(img):
+def title_read(img, name):
 
     img = np.array(img)
 
@@ -153,7 +153,7 @@ def title_read(img):
             pt = make_pt(xy_data['titleX'], xy_data['titleY'], ti[0][0], ti[0][2])
             
             # 제목부분 박스
-            dst = cv2.rectangle(dst, pt[0], pt[1], (0, 0, 255), thickness = 3)
+            dst = cv2.rectangle(dst, pt[0], pt[1], (255, 0, 0), thickness = 3)
                
             result = reader.readtext(dst[
                 xy_data['firstY'][0]:xy_data['firstY'][1],
@@ -167,9 +167,12 @@ def title_read(img):
                 pt = make_pt(xy_data['firstX'], xy_data['firstY'], dt[0][0], dt[0][2])
             
                 # 날짜부분 박스
-                dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                dst = cv2.rectangle(dst, pt[0], pt[1], (255, 0, 0), thickness = 3)
+
+                img=Image.fromarray(dst)
+                img.save(f'./static/imgr/{name}')
                 
-                img_data['img1'] = dst
+                # img_data['img1'] = dst
 
             print(resulttext['date'])
                         
@@ -183,7 +186,7 @@ def title_read(img):
             pt = make_pt(xy_data['titleX'], xy_data['titleY'], ti[0][0], ti[0][2])
 
             # 제목부분 박스
-            dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+            dst = cv2.rectangle(dst, pt[0], pt[1], (255, 0, 0), thickness = 3)
             
             
             result = reader.readtext(dst[
@@ -200,7 +203,7 @@ def title_read(img):
                     pt = make_pt(xy_data['thirdX'], xy_data['thirdY'], result[i][0][0], result[i][0][2])
 
                     # 유질환 제목부분 박스
-                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (255, 0, 0), thickness = 3)
                     
                     #-----------------------------------------------------------
 
@@ -208,12 +211,15 @@ def title_read(img):
                     pt = make_pt(xy_data['thirdX'], xy_data['thirdY'], result[i + 1][0][0], result[i + 1][0][2])
 
                     # 유질환부분 박스
-                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (255, 0, 0), thickness = 3)
                     
                     
             print(resulttext['disease'])
 
-            img_data['img2'] = dst
+            img=Image.fromarray(dst)
+            img.save(f'./static/imgr/{name}')
+
+            # img_data['img2'] = dst
             
             break
         
@@ -240,21 +246,21 @@ def title_read(img):
                     pt = make_pt(xy_data['secondX'], xy_data['secondY'], result[i][0][0], result[i][0][2])
 
                     # 키, 몸무게 제목부분 박스
-                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (255, 0, 0), thickness = 3)
                     
                     
                     # 좌표
                     pt = make_pt(xy_data['secondX'], xy_data['secondY'], result[i + 1][0][0], result[i + 1][0][2])
 
                     # 키 부분 박스
-                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (255, 0, 0), thickness = 3)
                     
                     
                     # 좌표
                     pt = make_pt(xy_data['secondX'], xy_data['secondY'], result[i + 2][0][0], result[i + 2][0][2])
 
                     # 몸무게 제목부분 박스
-                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (255, 0, 0), thickness = 3)
 
                 
                     print(resulttext['height'], resulttext['weight'])
@@ -267,31 +273,34 @@ def title_read(img):
                     pt = make_pt(xy_data['secondX'], xy_data['secondY'], result[i][0][0], result[i][0][2])
 
                     # 시력 제목부분 박스
-                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (255, 0, 0), thickness = 3)
                     
                     
                     # 좌표
                     pt = make_pt(xy_data['secondX'], xy_data['secondY'], result[i + 1][0][0], result[i + 1][0][2])
 
                     # 왼쪽 부분 박스
-                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (255, 0, 0), thickness = 3)
                     
                     
                     # 좌표
                     pt = make_pt(xy_data['secondX'], xy_data['secondY'], result[i + 3][0][0], result[i + 2][0][2])
 
                     # 오른쪽 부분 박스
-                    dst = cv2.rectangle(dst, pt[0], pt[1], (0, 255, 0), thickness = 3)
+                    dst = cv2.rectangle(dst, pt[0], pt[1], (255, 0, 0), thickness = 3)
                     
                 
             print(resulttext['eye_l'], resulttext['eye_r'])
 
-            img_data['img3'] = img
+            img=Image.fromarray(dst)
+            img.save(f'./static/imgr/{name}')
+
+            # img_data['img3'] = img
 
             break
         
 
-    return resulttext, img_data
+    return resulttext
 
 
 
