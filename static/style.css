@@ -143,6 +143,44 @@ a:visited {
 }
 
 /* ocrbody.html */
+/* #uploadfile {
+    border: 2px solid black;
+    font-size: large;
+    border-radius: 5px;
+    padding: 2px;
+    background-color: aliceblue;
+    /* font-size: 25px; */
+
+/* } */
+
+#read {
+    border: 2px solid black; 
+    border-radius: 5px;
+    padding: 2px; 
+    width: 62px;
+    height: 24px; 
+    display:inline-block;
+    text-align: center;
+}
+
+#save {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 2px; 
+    width: 62px;
+    height: 24px; 
+    display:inline-block;
+    text-align: center;
+
+}
+.btnAtt{
+    border: 2px solid black;
+    font-size: large;
+    border-radius: 5px;
+    padding: 2px;
+    background-color: aliceblue;
+
+}
 
 #result {
     margin-right: 30px;
