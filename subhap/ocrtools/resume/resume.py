@@ -37,8 +37,8 @@ def plt_imshow_bgr(bgr_img):
 def facedetect(path,k):
     
     frame=cv2.imread(path) #민수 사진 frame
-    model = os.path.join('C:/DevRoot/flowers/subhap/ocrtools/resume/res10_300x300_ssd_iter_140000_fp16.caffemodel')
-    config = os.path.join('C:/DevRoot/flowers/subhap/ocrtools/resume/dproto.txt')
+    model = os.path.join('/Users/general/Documents/flower/flowers/subhap/ocrtools/resume/res10_300x300_ssd_iter_140000_fp16.caffemodel')
+    config = os.path.join('/Users/general/Documents/flower/flowers/subhap/ocrtools/resume/dproto.txt')
     print(model,config)
    
     net = cv2.dnn.readNet(model, config)
