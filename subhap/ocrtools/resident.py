@@ -53,7 +53,7 @@ def searchth(img):
 
 
 
-def resident(path,imgname):
+def resident(path):
     img=cv2.imread(os.path.join(path))
 
     img_re = cv2.resize(img, (0,0), fx=2, fy=2)
@@ -99,10 +99,10 @@ def resident(path,imgname):
 
     # 처리된 img 좌표잡기 + OCR
     tot_y, tot_x, _ = pre_img.shape
-    reader = easyocr.Reader(['ko', 'en'])
+    reader = easyocr.Reader(['ko', 'en'], gpu=False)
     result = reader.readtext(pre_img)
 
-    print(result)
+    # print(result)
 
     # 각 조건에 맞는 xy 좌표(비율) 찾기
     for tu in result:
@@ -123,12 +123,12 @@ def resident(path,imgname):
             addr_y2 = tag_y2 + int(tot_y * 0.013)
             print(addr_x1, addr_x2, addr_y1, addr_y2)
 
-        elif tu[1] == "번호":
-            # 번호 태그의 xy 좌표값 저장
-            # no_x1 = tu[0][0][0]
-            no_x2 = tu[0][1][0]
-            no_y1 = tu[0][0][1]
-            no_y2 = tu[0][2][1] 
+        # elif tu[1] == "번호":
+        #     # 번호 태그의 xy 좌표값 저장
+        #     # no_x1 = tu[0][0][0]
+        #     no_x2 = tu[0][1][0]
+        #     no_y1 = tu[0][0][1]
+        #     no_y2 = tu[0][2][1] 
 
             # 세대주 관계에 대한 box matching
             # rel_x1 = no_x2 + int(tot_x * 0.015)
@@ -171,11 +171,11 @@ def resident(path,imgname):
                 resi_num = pre
 
 
-    print("이름 : ", name)
-    print("주민번호 : ", resi_num)
+    # print("이름 : ", name)
+    # print("주민번호 : ", resi_num)
             
     addr = addr_pre2.strip()
-    print("현주소 : ", addr)
+    # print("현주소 : ", addr)
 
 
 
